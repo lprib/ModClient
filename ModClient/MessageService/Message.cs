@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ModClient.MessageService
 {
-    class Message
+    public class Message
     {
         public Message(string senderName, string senderTrip, string text, List<RichTextNode> richText,
             bool isSelfMention, DateTime time)

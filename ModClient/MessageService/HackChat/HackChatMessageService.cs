@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using ModClient.MessageService;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading;
 
 namespace ModClient.MessageService.HackChat
@@ -75,12 +76,16 @@ namespace ModClient.MessageService.HackChat
                 case "onlineAdd":
                     var addNick = (string) messageJson["nick"];
                     OnlineUsers.Add(addNick);
-                    OnJoinLeave(true, addNick);
+                    OnJoinLeave?.Invoke(true, addNick);
                     break;
                 case "onlineRemove":
                     var removeNick = (string) messageJson["nick"];
                     OnlineUsers.Remove(removeNick);
-                    OnJoinLeave(false, removeNick);
+                    OnJoinLeave?.Invoke(false, removeNick);
+                    break;
+                default:
+                    Debug.WriteLine("Unrecognised message:");
+                    Debug.WriteLine(e.Data);
                     break;
             }
         }

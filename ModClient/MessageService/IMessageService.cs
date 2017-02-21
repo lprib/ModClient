@@ -3,15 +3,15 @@ using System.Collections.ObjectModel;
 
 namespace ModClient.MessageService
 {
-    delegate void MessageRecievedDelegate(Message message);
+    public delegate void MessageRecievedDelegate(Message message);
 
-    delegate void InfoRecievedDelegate(Dictionary<string, object> info);
+    public delegate void InfoRecievedDelegate(Dictionary<string, object> info);
 
     //if not isJoin, user left
-    delegate void OnJoinLeaveDelegate(bool isJoin, string user);
+    public delegate void OnJoinLeaveDelegate(bool isJoin, string user);
 
     //a service that fires events in the event of an incoming message, and includes the ability to send messages
-    interface IMessageService
+    public interface IMessageService
     {
         string Username { get; }
         string Channel { get; }
