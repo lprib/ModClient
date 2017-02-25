@@ -33,15 +33,15 @@ namespace ModClient.MessageService.HackChat
             {
                 while (true)
                 {
-                    webSocket.Send("{\"cmd\": \"ping\"}");
                     try
                     {
-                        Thread.Sleep(TimeSpan.FromSeconds(50));
+                        Thread.Sleep(TimeSpan.FromSeconds(300));
                     }
                     catch (ThreadInterruptedException e)
                     {
                         //do nothing, we want thread to be interrupted on close
                     }
+                    webSocket.Send("{\"cmd\": \"ping\"}");
                 }
             });
 

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ModClient.MessageService;
+using ModClient.MessageService.HackChat;
 
 namespace ModClientWinFormUI
 {
@@ -19,10 +21,20 @@ namespace ModClientWinFormUI
 
         private void defaultStartButton_Click(object sender, EventArgs e)
         {
-
+            AddTab(new HackChatMessageService("start", "asd", "botDev"));
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AddTab(IMessageService service)
+        {
+            var newTab = new TabPage()
+            {
+                Controls = {new ChatView() {Dock = DockStyle.Fill, Service = service}},
+                Text = service.Username + "@" + service.Channel
+            };
+            tabControl1.TabPages.Add(newTab);
+        }
+
+        private void closeTabButton_Click(object sender, EventArgs e)
         {
             var selected = tabControl1.SelectedTab;
 

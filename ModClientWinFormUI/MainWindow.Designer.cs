@@ -31,16 +31,13 @@
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newChatMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.closeTabButton = new System.Windows.Forms.Button();
             this.startTab = new System.Windows.Forms.TabPage();
             this.defaultStartButton = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.chatView1 = new ModClientWinFormUI.ChatView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.mainMenuStrip.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             this.startTab.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -64,21 +61,18 @@
             // newChatMenuItem
             // 
             this.newChatMenuItem.Name = "newChatMenuItem";
-            this.newChatMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newChatMenuItem.Size = new System.Drawing.Size(126, 22);
             this.newChatMenuItem.Text = "New Chat";
             // 
-            // tabControl1
+            // closeTabButton
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.startTab);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 27);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(284, 235);
-            this.tabControl1.TabIndex = 1;
+            this.closeTabButton.Location = new System.Drawing.Point(209, 1);
+            this.closeTabButton.Name = "closeTabButton";
+            this.closeTabButton.Size = new System.Drawing.Size(75, 23);
+            this.closeTabButton.TabIndex = 2;
+            this.closeTabButton.Text = "Close Tab";
+            this.closeTabButton.UseVisualStyleBackColor = true;
+            this.closeTabButton.Click += new System.EventHandler(this.closeTabButton_Click);
             // 
             // startTab
             // 
@@ -94,55 +88,33 @@
             // 
             // defaultStartButton
             // 
-            this.defaultStartButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.defaultStartButton.Location = new System.Drawing.Point(103, 21);
+            this.defaultStartButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.defaultStartButton.Location = new System.Drawing.Point(6, 6);
             this.defaultStartButton.Name = "defaultStartButton";
-            this.defaultStartButton.Size = new System.Drawing.Size(75, 23);
+            this.defaultStartButton.Size = new System.Drawing.Size(264, 54);
             this.defaultStartButton.TabIndex = 0;
             this.defaultStartButton.Text = "New Chat";
             this.defaultStartButton.UseVisualStyleBackColor = true;
             this.defaultStartButton.Click += new System.EventHandler(this.defaultStartButton_Click);
             // 
-            // tabPage1
+            // tabControl1
             // 
-            this.tabPage1.Controls.Add(this.chatView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(276, 209);
-            this.tabPage1.TabIndex = 1;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // chatView1
-            // 
-            this.chatView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.chatView1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.chatView1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chatView1.Location = new System.Drawing.Point(0, 0);
-            this.chatView1.Margin = new System.Windows.Forms.Padding(0);
-            this.chatView1.Name = "chatView1";
-            this.chatView1.Size = new System.Drawing.Size(276, 209);
-            this.chatView1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(209, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Close Tab";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.tabControl1.Controls.Add(this.startTab);
+            this.tabControl1.Location = new System.Drawing.Point(0, 27);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(284, 235);
+            this.tabControl1.TabIndex = 1;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.closeTabButton);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
@@ -150,9 +122,8 @@
             this.Text = "-";
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
             this.startTab.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,12 +134,10 @@
         private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newChatMenuItem;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.Button closeTabButton;
         private System.Windows.Forms.TabPage startTab;
         private System.Windows.Forms.Button defaultStartButton;
-        private System.Windows.Forms.TabPage tabPage1;
-        private ChatView chatView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabControl tabControl1;
     }
 }
 

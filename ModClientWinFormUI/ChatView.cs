@@ -43,7 +43,7 @@ namespace ModClientWinFormUI
         {
             InitializeComponent();
 
-            Service = new HackChatMessageService("whomst", "kek", "botDev");
+            Service = new HackChatMessageService("dontRateLimit", "kek", "botDev");
             Service.OnMessageRecieved += AddMessage;
 
             usernameStyle.VisualMarkerClick +=
@@ -51,7 +51,6 @@ namespace ModClientWinFormUI
                 {
                     messageInputBox.AppendText("@" + (usernameStyle as UsernameStyle)?.GetText(args.Marker));
                 };
-            //Service.SendMessage("hello");
         }
 
         public void AddMessage(ModClient.MessageService.Message message)
