@@ -29,15 +29,10 @@ namespace ModClientWinFormUI
             }
         }
 
-        //the row where the next chat will be inserted
-        private int nextRow;
-
-//        private static Style UsernameStyle = new TextStyle(new SolidBrush(Color.DodgerBlue), null, FontStyle.Bold);
-//        private static Style UsernameStyle = new ShortcutStyle(Pens.Black);
-        private static Style usernameStyle = new UsernameStyle(new SolidBrush(Color.DarkCyan), null, FontStyle.Regular);
-        private static Style latexStyle = new TextStyle(new SolidBrush(Color.LightBlue), null, FontStyle.Italic);
-        private static Style tripStyle = new TextStyle(new SolidBrush(Color.Aqua), null, FontStyle.Italic);
-        private static Style timeStyle = new TextStyle(new SolidBrush(Color.LightSeaGreen), null, FontStyle.Italic);
+        private static readonly Style UsernameStyle = new UsernameStyle(new SolidBrush(Color.DarkCyan), null, FontStyle.Regular);
+        private static readonly Style LatexStyle = new TextStyle(new SolidBrush(Color.LightBlue), null, FontStyle.Italic);
+        private static readonly Style TripStyle = new TextStyle(new SolidBrush(Color.Aqua), null, FontStyle.Italic);
+        private static readonly Style TimeStyle = new TextStyle(new SolidBrush(Color.LightSeaGreen), null, FontStyle.Italic);
 
         public ChatView()
         {
@@ -46,10 +41,10 @@ namespace ModClientWinFormUI
             Service = new HackChatMessageService("dontRateLimit", "kek", "botDev");
             Service.OnMessageRecieved += AddMessage;
 
-            usernameStyle.VisualMarkerClick +=
+            UsernameStyle.VisualMarkerClick +=
                 (sender, args) =>
                 {
-                    messageInputBox.AppendText("@" + (usernameStyle as UsernameStyle)?.GetText(args.Marker));
+                    messageInputBox.AppendText("@" + (UsernameStyle as UsernameStyle)?.GetText(args.Marker));
                 };
         }
 
@@ -57,11 +52,11 @@ namespace ModClientWinFormUI
         {
             Invoke((MethodInvoker) (() =>
             {
-                AppendStyle(message.Time.ToString("hh:mmtt"), timeStyle);
+                AppendStyle(message.Time.ToString("hh:mmtt"), TimeStyle);
                 chatBox.AppendText(" ");
-                AppendStyle(message.SenderTrip, tripStyle);
+                AppendStyle(message.SenderTrip, TripStyle);
                 chatBox.AppendText(" ");
-                AppendStyle(message.SenderName, usernameStyle);
+                AppendStyle(message.SenderName, UsernameStyle);
                 chatBox.AppendText(": ");
 
                 foreach (var node in message.RichText)
@@ -72,10 +67,10 @@ namespace ModClientWinFormUI
                             AppendStyle(node.Value, null);
                             break;
                         case RichTextNode.NodeType.FORMATTED:
-                            AppendStyle(node.Value, latexStyle);
+                            AppendStyle(node.Value, LatexStyle);
                             break;
                         case RichTextNode.NodeType.USERNAME:
-                            AppendStyle(node.Value, usernameStyle);
+                            AppendStyle(node.Value, UsernameStyle);
                             break;
                     }
                 }

@@ -37,7 +37,7 @@ namespace ModClient.MessageService.HackChat
                     {
                         Thread.Sleep(TimeSpan.FromSeconds(300));
                     }
-                    catch (ThreadInterruptedException e)
+                    catch (ThreadInterruptedException _)
                     {
                         //do nothing, we want thread to be interrupted on close
                     }

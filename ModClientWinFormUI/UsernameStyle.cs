@@ -8,7 +8,6 @@ namespace ModClientWinFormUI
     //this is a custom style for all usernames that allows clicking, and retrieving of the text that was clicked
     public class UsernameStyle : TextStyle
     {
-        public event Action<string> OnClick;
         //the clicker cannot get the text, so it must be stored in a dictionary for retrieval
         private Dictionary<StyleVisualMarker, string> strings;
 

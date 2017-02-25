@@ -22,6 +22,7 @@ namespace ModClientWinFormUI
         private void defaultStartButton_Click(object sender, EventArgs e)
         {
             AddTab(new HackChatMessageService("start", "asd", "botDev"));
+            new ChatSelectionWindow().Show();
         }
 
         private void AddTab(IMessageService service)
