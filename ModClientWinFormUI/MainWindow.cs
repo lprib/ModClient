@@ -21,5 +21,17 @@ namespace ModClientWinFormUI
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var selected = tabControl1.SelectedTab;
+
+            foreach (var control in selected.Controls)
+            {
+                (control as ChatView)?.Service.Close();
+            }
+
+            tabControl1.TabPages.Remove(selected);
+        }
     }
 }

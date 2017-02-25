@@ -28,46 +28,78 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatView));
+            this.messageInputBox = new System.Windows.Forms.TextBox();
+            this.chatBox = new FastColoredTextBoxNS.FastColoredTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.chatBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // messageInputBox
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.messageInputBox.AcceptsReturn = true;
+            this.messageInputBox.AllowDrop = true;
+            this.messageInputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 127);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(144, 20);
-            this.textBox1.TabIndex = 0;
+            this.messageInputBox.Location = new System.Drawing.Point(0, 378);
+            this.messageInputBox.Margin = new System.Windows.Forms.Padding(0);
+            this.messageInputBox.Multiline = true;
+            this.messageInputBox.Name = "messageInputBox";
+            this.messageInputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.messageInputBox.Size = new System.Drawing.Size(626, 64);
+            this.messageInputBox.TabIndex = 0;
+            this.messageInputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.messageInputBox_KeyDown);
             // 
-            // tableLayoutPanel1
+            // chatBox
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.chatBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.AutoScroll = true;
-            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 4);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(144, 117);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.chatBox.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.chatBox.AutoScrollMinSize = new System.Drawing.Size(0, 14);
+            this.chatBox.BackBrush = null;
+            this.chatBox.CaretVisible = false;
+            this.chatBox.CharHeight = 14;
+            this.chatBox.CharWidth = 8;
+            this.chatBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chatBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.chatBox.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.chatBox.IsReplaceMode = false;
+            this.chatBox.Location = new System.Drawing.Point(0, 0);
+            this.chatBox.Name = "chatBox";
+            this.chatBox.Paddings = new System.Windows.Forms.Padding(0);
+            this.chatBox.ReadOnly = true;
+            this.chatBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.chatBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("chatBox.ServiceColors")));
+            this.chatBox.ShowLineNumbers = false;
+            this.chatBox.Size = new System.Drawing.Size(626, 375);
+            this.chatBox.TabIndex = 1;
+            this.chatBox.WordWrap = true;
+            this.chatBox.WordWrapIndent = 4;
+            this.chatBox.Zoom = 100;
             // 
             // ChatView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.chatBox);
+            this.Controls.Add(this.messageInputBox);
+            this.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ChatView";
+            this.Size = new System.Drawing.Size(626, 442);
+            ((System.ComponentModel.ISupportInitialize)(this.chatBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -75,7 +107,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TextBox messageInputBox;
+        private FastColoredTextBoxNS.FastColoredTextBox chatBox;
     }
 }

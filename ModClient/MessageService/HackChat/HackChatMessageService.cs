@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace ModClient.MessageService.HackChat
 {
-    class HackChatMessageService : IMessageService
+    public class HackChatMessageService : IMessageService
     {
         public string Channel { get; }
         public string Username { get; }
@@ -34,7 +34,14 @@ namespace ModClient.MessageService.HackChat
                 while (true)
                 {
                     webSocket.Send("{\"cmd\": \"ping\"}");
-                    Thread.Sleep(TimeSpan.FromSeconds(50));
+                    try
+                    {
+                        Thread.Sleep(TimeSpan.FromSeconds(50));
+                    }
+                    catch (ThreadInterruptedException e)
+                    {
+                        //do nothing, we want thread to be interrupted on close
+                    }
                 }
             });
 
@@ -95,6 +102,11 @@ namespace ModClient.MessageService.HackChat
             var serialized =
                 JsonConvert.SerializeObject(new Dictionary<string, string> {{"cmd", "chat"}, {"text", message}});
             webSocket.Send(serialized);
+        }
+
+        public void Close()
+        {
+            webSocket.Close();
         }
     }
 }

@@ -22,5 +22,6 @@ namespace ModClient.MessageService
         event OnJoinLeaveDelegate OnJoinLeave;
 
         void SendMessage(string message);
+        void Close();
     }
 }
