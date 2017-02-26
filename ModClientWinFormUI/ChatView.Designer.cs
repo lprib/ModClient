@@ -39,8 +39,7 @@
             // 
             this.messageInputBox.AcceptsReturn = true;
             this.messageInputBox.AllowDrop = true;
-            this.messageInputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.messageInputBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.messageInputBox.Location = new System.Drawing.Point(0, 378);
             this.messageInputBox.Margin = new System.Windows.Forms.Padding(0);
             this.messageInputBox.Multiline = true;
@@ -73,7 +72,6 @@
             this.chatBox.CharWidth = 8;
             this.chatBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.chatBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.chatBox.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.chatBox.IsReplaceMode = false;
             this.chatBox.Location = new System.Drawing.Point(0, 0);
             this.chatBox.Name = "chatBox";

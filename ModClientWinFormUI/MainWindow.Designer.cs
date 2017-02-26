@@ -46,7 +46,7 @@
             this.fileMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(284, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(358, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -61,12 +61,14 @@
             // newChatMenuItem
             // 
             this.newChatMenuItem.Name = "newChatMenuItem";
-            this.newChatMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.newChatMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newChatMenuItem.Text = "New Chat";
+            this.newChatMenuItem.Click += new System.EventHandler(this.addTab_Click);
             // 
             // closeTabButton
             // 
-            this.closeTabButton.Location = new System.Drawing.Point(209, 1);
+            this.closeTabButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.closeTabButton.Location = new System.Drawing.Point(283, 1);
             this.closeTabButton.Name = "closeTabButton";
             this.closeTabButton.Size = new System.Drawing.Size(75, 23);
             this.closeTabButton.TabIndex = 2;
@@ -80,22 +82,22 @@
             this.startTab.Location = new System.Drawing.Point(4, 22);
             this.startTab.Margin = new System.Windows.Forms.Padding(0);
             this.startTab.Name = "startTab";
-            this.startTab.Padding = new System.Windows.Forms.Padding(3);
-            this.startTab.Size = new System.Drawing.Size(276, 209);
+            this.startTab.Size = new System.Drawing.Size(350, 163);
             this.startTab.TabIndex = 0;
             this.startTab.Text = "Start";
             this.startTab.UseVisualStyleBackColor = true;
             // 
             // defaultStartButton
             // 
-            this.defaultStartButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.defaultStartButton.Location = new System.Drawing.Point(6, 6);
+            this.defaultStartButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.defaultStartButton.Location = new System.Drawing.Point(3, 11);
             this.defaultStartButton.Name = "defaultStartButton";
-            this.defaultStartButton.Size = new System.Drawing.Size(264, 54);
+            this.defaultStartButton.Size = new System.Drawing.Size(344, 54);
             this.defaultStartButton.TabIndex = 0;
             this.defaultStartButton.Text = "New Chat";
             this.defaultStartButton.UseVisualStyleBackColor = true;
-            this.defaultStartButton.Click += new System.EventHandler(this.defaultStartButton_Click);
+            this.defaultStartButton.Click += new System.EventHandler(this.addTab_Click);
             // 
             // tabControl1
             // 
@@ -106,20 +108,21 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(284, 235);
+            this.tabControl1.Size = new System.Drawing.Size(358, 189);
             this.tabControl1.TabIndex = 1;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(358, 216);
             this.Controls.Add(this.closeTabButton);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.mainMenuStrip);
             this.MainMenuStrip = this.mainMenuStrip;
+            this.MinimumSize = new System.Drawing.Size(197, 255);
             this.Name = "MainWindow";
-            this.Text = "-";
+            this.Text = "ModClient";
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             this.startTab.ResumeLayout(false);

@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageService\InfoType.cs" />
     <Compile Include="View\ChatView.cs" />
     <Compile Include="MessageService\HackChat\HackChatMessageService.cs" />
     <Compile Include="MessageService\HackChat\HackChatTextParser.cs" />

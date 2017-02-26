@@ -103,6 +103,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.passwordCheckBox.Location = new System.Drawing.Point(107, 90);
             this.passwordCheckBox.Name = "passwordCheckBox";
+            this.passwordCheckBox.PasswordChar = '●';
             this.passwordCheckBox.Size = new System.Drawing.Size(142, 20);
             this.passwordCheckBox.TabIndex = 6;
             // 
@@ -124,6 +125,7 @@
             this.okButton.TabIndex = 8;
             this.okButton.Text = "Connect";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
@@ -134,6 +136,7 @@
             this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // ChatSelectionWindow
             // 

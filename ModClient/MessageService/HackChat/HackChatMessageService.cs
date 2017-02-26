@@ -19,10 +19,11 @@ namespace ModClient.MessageService.HackChat
         public IList<string> OnlineUsers { get; private set; }
 
         public event MessageRecievedDelegate OnMessageRecieved;
-        public event OnJoinLeaveDelegate OnJoinLeave;
+        public event InfoRecievedDelegate OnInfoRecieved;
 
         private WebSocket webSocket;
         private Thread pingThread;
+
 
         public HackChatMessageService(string username, string password, string channel)
         {
@@ -39,6 +40,7 @@ namespace ModClient.MessageService.HackChat
                     }
                     catch (ThreadInterruptedException _)
                     {
+                        Console.WriteLine(_);
                         //do nothing, we want thread to be interrupted on close
                     }
                     webSocket.Send("{\"cmd\": \"ping\"}");
@@ -71,24 +73,28 @@ namespace ModClient.MessageService.HackChat
                     time = time.ToLocalTime();
 
                     var text = (string) messageJson["text"];
+                    var nick = (string) messageJson["nick"];
+                    var trip = (string) messageJson["trip"];
 
                     var richText = HackChatTextParser.GetRichText(text, this);
-                    var message = new Message((string) messageJson["nick"], (string) messageJson["trip"], text, richText,
-                        text.ToLower().Contains(Username.ToLower()), time);
+                    var message = new Message(nick, trip, text, richText, text.ToLower().Contains(Username.ToLower()),
+                        time);
+
                     OnMessageRecieved?.Invoke(message);
                     break;
                 case "onlineSet":
                     OnlineUsers = messageJson["nicks"].ToObject<List<string>>();
+                    OnInfoRecieved?.Invoke(InfoType.OnlineSet, OnlineUsers);
                     break;
                 case "onlineAdd":
                     var addNick = (string) messageJson["nick"];
                     OnlineUsers.Add(addNick);
-                    OnJoinLeave?.Invoke(true, addNick);
+                    OnInfoRecieved?.Invoke(InfoType.OnlineAdd, addNick);
                     break;
                 case "onlineRemove":
                     var removeNick = (string) messageJson["nick"];
                     OnlineUsers.Remove(removeNick);
-                    OnJoinLeave?.Invoke(false, removeNick);
+                    OnInfoRecieved?.Invoke(InfoType.OnlineRemove, removeNick);
                     break;
                 default:
                     Debug.WriteLine("Unrecognised message:");

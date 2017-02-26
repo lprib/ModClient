@@ -29,7 +29,7 @@ namespace ModClient.View
             Console.Clear();
 
             service = new HackChatMessageService(username, pass, chan);
-            service.OnJoinLeave += (isJoin, user) => Console.WriteLine(user + (isJoin ? " joined." : " left."));
+            //service.OnJoinLeave += (isJoin, user) => Console.WriteLine(user + (isJoin ? " joined." : " left."));
             service.OnMessageRecieved += OnMessageRevieved;
 
             while (true)

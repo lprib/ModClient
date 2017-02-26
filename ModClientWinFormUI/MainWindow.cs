@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModClient.MessageService;
 using ModClient.MessageService.HackChat;
+using ModClientWinFormUI.Properties;
 
 namespace ModClientWinFormUI
 {
@@ -17,12 +18,18 @@ namespace ModClientWinFormUI
         public MainWindow()
         {
             InitializeComponent();
+            //load icon from resources
+            Icon = Icon.FromHandle(Resources.icon.GetHicon());
         }
 
-        private void defaultStartButton_Click(object sender, EventArgs e)
+        private void addTab_Click(object sender, EventArgs e)
         {
-            AddTab(new HackChatMessageService("start", "asd", "botDev"));
-            new ChatSelectionWindow().Show();
+            var selectionWin = new ChatSelectionWindow();
+            selectionWin.ShowDialog();
+            if (selectionWin.DialogResult == DialogResult.OK)
+            {
+                AddTab(new HackChatMessageService(selectionWin.Username, selectionWin.Password, selectionWin.Channel));
+            }
         }
 
         private void AddTab(IMessageService service)

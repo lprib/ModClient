@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
@@ -26,25 +27,37 @@ namespace ModClientWinFormUI
                 service = value;
                 if (value == null)
                     throw new NullReferenceException();
+                Service.OnMessageRecieved += AddMessage;
+                Service.OnInfoRecieved += AddInfo;
             }
         }
 
-        private static readonly Style UsernameStyle = new UsernameStyle(new SolidBrush(Color.DarkCyan), null, FontStyle.Regular);
-        private static readonly Style LatexStyle = new TextStyle(new SolidBrush(Color.LightBlue), null, FontStyle.Italic);
-        private static readonly Style TripStyle = new TextStyle(new SolidBrush(Color.Aqua), null, FontStyle.Italic);
-        private static readonly Style TimeStyle = new TextStyle(new SolidBrush(Color.LightSeaGreen), null, FontStyle.Italic);
+        private static readonly Style UsernameStyle =
+            new UsernameStyle(new SolidBrush(Color.FromArgb(33, 150, 243)), null, FontStyle.Bold);
+
+        private static readonly Style LatexStyle =
+            new TextStyle(new SolidBrush(Color.FromArgb(255, 152, 0)), null, FontStyle.Regular);
+
+        private static readonly Style TripStyle =
+            new TextStyle(new SolidBrush(Color.FromArgb(96, 125, 139)), null, FontStyle.Regular);
+
+        private static readonly Style TimeStyle =
+            new TextStyle(new SolidBrush(Color.FromArgb(38, 50, 56)), null, FontStyle.Regular);
+
+        private static readonly Style InfoStyle =
+            new TextStyle(new SolidBrush(Color.FromArgb(76, 175, 80)), null, FontStyle.Italic);
+
+        private static readonly Style SelfMentionStyle =
+            new TextStyle(new SolidBrush(Color.FromArgb(244, 67, 54)), null, FontStyle.Regular);
 
         public ChatView()
         {
             InitializeComponent();
 
-            Service = new HackChatMessageService("dontRateLimit", "kek", "botDev");
-            Service.OnMessageRecieved += AddMessage;
-
             UsernameStyle.VisualMarkerClick +=
                 (sender, args) =>
                 {
-                    messageInputBox.AppendText("@" + (UsernameStyle as UsernameStyle)?.GetText(args.Marker));
+                    messageInputBox.AppendText("@" + (UsernameStyle as UsernameStyle)?.GetText(args.Marker) + " ");
                 };
         }
 
@@ -64,7 +77,7 @@ namespace ModClientWinFormUI
                     switch (node.Type)
                     {
                         case RichTextNode.NodeType.TEXT:
-                            AppendStyle(node.Value, null);
+                            AppendStyle(node.Value, message.IsSelfMention ? SelfMentionStyle : null);
                             break;
                         case RichTextNode.NodeType.FORMATTED:
                             AppendStyle(node.Value, LatexStyle);
@@ -77,6 +90,25 @@ namespace ModClientWinFormUI
 
                 chatBox.AppendText("\n");
             }));
+        }
+
+        private void AddInfo(InfoType type, object data)
+        {
+            switch (type)
+            {
+                case InfoType.OnlineSet:
+                    AppendStyle("Online users: " + ((List<string>) data).Aggregate((a, i) => a + ", " + i) + "\n", InfoStyle);
+                    break;
+                case InfoType.OnlineAdd:
+                    AppendStyle(((string) data) + " joined.\n", InfoStyle);
+                    break;
+                case InfoType.OnlineRemove:
+                    AppendStyle(((string) data) + " left.\n", InfoStyle);
+                    break;
+                default:
+                    AppendStyle(type + "\n", InfoStyle);
+                    break;
+            }
         }
 
         private void messageInputBox_KeyDown(object sender, KeyEventArgs e)
@@ -93,7 +125,7 @@ namespace ModClientWinFormUI
         {
             chatBox.AppendText(text);
 
-            if (style == null) return;
+            if (style == null || text == "") return;
             var appendRange = chatBox.GetRange(chatBox.TextLength - text.Length, chatBox.TextLength);
             appendRange.SetStyle(style);
         }
