@@ -68,5 +68,11 @@ namespace ModClientWinFormUI
         {
             AddTab(new HackChatMessageService("ModClient_test", "test", "botDev"));
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            linkLabel1.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/JaxForReal/ModClient/");
+        }
     }
 }

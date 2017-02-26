@@ -156,7 +156,7 @@
             this.Controls.Add(this.connectionTypeCombo);
             this.MinimumSize = new System.Drawing.Size(277, 207);
             this.Name = "ChatSelectionWindow";
-            this.Text = "ChatSelectionWindow";
+            this.Text = "New Chat";
             this.ResumeLayout(false);
             this.PerformLayout();
 

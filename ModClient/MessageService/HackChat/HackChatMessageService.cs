@@ -96,6 +96,32 @@ namespace ModClient.MessageService.HackChat
                     OnlineUsers.Remove(removeNick);
                     OnInfoRecieved?.Invoke(InfoType.OnlineRemove, removeNick);
                     break;
+                case "warn":
+                    var warnText = (string) messageJson["text"];
+                    switch (warnText)
+                    {
+                        case "Nickname must consist of up to 24 letters, numbers, and underscores":
+                            OnInfoRecieved?.Invoke(InfoType.InvalidUsername, warnText);
+                            break;
+                        case "Cannot impersonate the admin":
+                            OnInfoRecieved?.Invoke(InfoType.ImpersonatingAdmin, warnText);
+                            break;
+                        case "Nickname taken":
+                            OnInfoRecieved?.Invoke(InfoType.UsernameTaken, warnText);
+                            break;
+                        case "You are joining channels too fast. Wait a moment and try again.":
+                            OnInfoRecieved?.Invoke(InfoType.ChannelRatelimit, warnText);
+                            break;
+                        case "You are sending too much text. Wait a moment and try again.\n" +
+                             "Press the up arrow key to restore your last message.":
+                            OnInfoRecieved?.Invoke(InfoType.MessageRatelimit, warnText);
+                            break;
+                        default:
+                            Console.WriteLine("Unrecognised warning:\n" + e.Data);
+                            break;
+                    }
+                    break;
+
                 default:
                     Debug.WriteLine("Unrecognised message:");
                     Debug.WriteLine(e.Data);

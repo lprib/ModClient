@@ -17,7 +17,10 @@ namespace ModClient.MessageService
         ChannelRatelimit, //null
         MessageRatelimit, //null
         UserBan, //string nick
-        UserInvite //string[] {nick, channel}
+        UserInvite, //string[] {nick, channel}
+        UsernameTaken, //null
+        InvalidUsername, //null
+        ImpersonatingAdmin //null
 
         #endregion
     }
