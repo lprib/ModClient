@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using FastColoredTextBoxNS;
 using ModClient.MessageService;
 using ModClient.MessageService.HackChat;
+using ModClientWinFormUI.Properties;
 
 namespace ModClientWinFormUI
 {
@@ -58,13 +59,14 @@ namespace ModClientWinFormUI
                 (sender, args) =>
                 {
                     messageInputBox.AppendText("@" + (UsernameStyle as UsernameStyle)?.GetText(args.Marker) + " ");
-                };
+                };      
         }
 
         public void AddMessage(ModClient.MessageService.Message message)
         {
             Invoke((MethodInvoker) (() =>
             {
+                AppendStyle("- ", SelfMentionStyle);
                 AppendStyle(message.Time.ToString("hh:mmtt"), TimeStyle);
                 chatBox.AppendText(" ");
                 AppendStyle(message.SenderTrip, TripStyle);
@@ -125,7 +127,7 @@ namespace ModClientWinFormUI
         {
             chatBox.AppendText(text);
 
-            if (style == null || text == "") return;
+            if (style == null || text == null) return;
             var appendRange = chatBox.GetRange(chatBox.TextLength - text.Length, chatBox.TextLength);
             appendRange.SetStyle(style);
         }

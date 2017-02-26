@@ -44,6 +44,7 @@
             // 
             this.connectionTypeCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.connectionTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.connectionTypeCombo.FormattingEnabled = true;
             this.connectionTypeCombo.Items.AddRange(new object[] {
             "Hack.Chat"});

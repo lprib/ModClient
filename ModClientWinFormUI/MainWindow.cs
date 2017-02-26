@@ -45,6 +45,7 @@ namespace ModClientWinFormUI
         private void closeTabButton_Click(object sender, EventArgs e)
         {
             var selected = tabControl1.SelectedTab;
+            if (selected != null) return;
 
             foreach (var control in selected.Controls)
             {
@@ -52,6 +53,14 @@ namespace ModClientWinFormUI
             }
 
             tabControl1.TabPages.Remove(selected);
+        }
+
+        //close all services on main form close
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (var page in tabControl1.TabPages)
+            foreach (var control in ((TabPage) page).Controls)
+                (control as ChatView)?.Service.Close();
         }
     }
 }
