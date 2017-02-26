@@ -104,9 +104,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.passwordCheckBox.Location = new System.Drawing.Point(107, 90);
             this.passwordCheckBox.Name = "passwordCheckBox";
-            this.passwordCheckBox.PasswordChar = '●';
             this.passwordCheckBox.Size = new System.Drawing.Size(142, 20);
             this.passwordCheckBox.TabIndex = 6;
+            this.passwordCheckBox.UseSystemPasswordChar = true;
             // 
             // label4
             // 

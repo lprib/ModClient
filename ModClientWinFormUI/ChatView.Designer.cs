@@ -40,6 +40,7 @@
             this.messageInputBox.AcceptsReturn = true;
             this.messageInputBox.AllowDrop = true;
             this.messageInputBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.messageInputBox.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.messageInputBox.Location = new System.Drawing.Point(0, 378);
             this.messageInputBox.Margin = new System.Windows.Forms.Padding(0);
             this.messageInputBox.Multiline = true;
@@ -65,13 +66,14 @@
         '\"',
         '\'',
         '\''};
-            this.chatBox.AutoScrollMinSize = new System.Drawing.Size(0, 14);
+            this.chatBox.AutoScrollMinSize = new System.Drawing.Size(0, 19);
             this.chatBox.BackBrush = null;
             this.chatBox.CaretVisible = false;
-            this.chatBox.CharHeight = 14;
-            this.chatBox.CharWidth = 8;
+            this.chatBox.CharHeight = 19;
+            this.chatBox.CharWidth = 9;
             this.chatBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.chatBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.chatBox.Font = new System.Drawing.Font("Everson Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chatBox.IsReplaceMode = false;
             this.chatBox.Location = new System.Drawing.Point(0, 0);
             this.chatBox.Name = "chatBox";

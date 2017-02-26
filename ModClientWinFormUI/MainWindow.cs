@@ -22,6 +22,17 @@ namespace ModClientWinFormUI
             Icon = Icon.FromHandle(Resources.icon.GetHicon());
         }
 
+        private void AddTab(IMessageService service)
+        {
+            var newTab = new TabPage()
+            {
+                Controls = {new ChatView() {Dock = DockStyle.Fill, Service = service}},
+                Text = service.Username + "@" + service.Channel
+            };
+            tabControl1.TabPages.Add(newTab);
+            tabControl1.SelectedTab = newTab;
+        }
+
         private void addTab_Click(object sender, EventArgs e)
         {
             var selectionWin = new ChatSelectionWindow();
@@ -32,20 +43,10 @@ namespace ModClientWinFormUI
             }
         }
 
-        private void AddTab(IMessageService service)
-        {
-            var newTab = new TabPage()
-            {
-                Controls = {new ChatView() {Dock = DockStyle.Fill, Service = service}},
-                Text = service.Username + "@" + service.Channel
-            };
-            tabControl1.TabPages.Add(newTab);
-        }
-
         private void closeTabButton_Click(object sender, EventArgs e)
         {
             var selected = tabControl1.SelectedTab;
-            if (selected != null) return;
+            if (selected == null) return;
 
             foreach (var control in selected.Controls)
             {
@@ -61,6 +62,11 @@ namespace ModClientWinFormUI
             foreach (var page in tabControl1.TabPages)
             foreach (var control in ((TabPage) page).Controls)
                 (control as ChatView)?.Service.Close();
+        }
+
+        private void devChatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddTab(new HackChatMessageService("ModClient_test", "test", "botDev"));
         }
     }
 }

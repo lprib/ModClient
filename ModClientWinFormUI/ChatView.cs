@@ -59,14 +59,15 @@ namespace ModClientWinFormUI
                 (sender, args) =>
                 {
                     messageInputBox.AppendText("@" + (UsernameStyle as UsernameStyle)?.GetText(args.Marker) + " ");
-                };      
+                };
+            chatBox.AppendText("\n");
         }
 
         public void AddMessage(ModClient.MessageService.Message message)
         {
             Invoke((MethodInvoker) (() =>
             {
-                AppendStyle("- ", SelfMentionStyle);
+                AppendStyle("--", SelfMentionStyle);
                 AppendStyle(message.Time.ToString("hh:mmtt"), TimeStyle);
                 chatBox.AppendText(" ");
                 AppendStyle(message.SenderTrip, TripStyle);
@@ -99,7 +100,8 @@ namespace ModClientWinFormUI
             switch (type)
             {
                 case InfoType.OnlineSet:
-                    AppendStyle("Online users: " + ((List<string>) data).Aggregate((a, i) => a + ", " + i) + "\n", InfoStyle);
+                    AppendStyle("Online users: " + ((List<string>) data).Aggregate((a, i) => a + ", " + i) + "\n",
+                        InfoStyle);
                     break;
                 case InfoType.OnlineAdd:
                     AppendStyle(((string) data) + " joined.\n", InfoStyle);
@@ -115,7 +117,7 @@ namespace ModClientWinFormUI
 
         private void messageInputBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && !e.Shift)
             {
                 Service.SendMessage(messageInputBox.Text);
                 messageInputBox.Clear();
@@ -128,7 +130,7 @@ namespace ModClientWinFormUI
             chatBox.AppendText(text);
 
             if (style == null || text == null) return;
-            var appendRange = chatBox.GetRange(chatBox.TextLength - text.Length, chatBox.TextLength);
+            var appendRange = chatBox.GetRange(chatBox.TextLength - text.Length - 1, chatBox.TextLength);
             appendRange.SetStyle(style);
         }
 
