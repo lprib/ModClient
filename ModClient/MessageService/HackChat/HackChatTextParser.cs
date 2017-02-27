@@ -11,7 +11,7 @@ namespace ModClient.MessageService.HackChat
     {
         private static readonly Regex latex = new Regex(@"\$[^\$]*\$");
 
-        public static List<RichTextNode> GetRichText(string text, MessageServiceBase serviceBase)
+        public static List<RichTextNode> GetRichText(string text, MessageServiceBase service)
         {
             //start with a single plaintext node conatining the entire text
             var richText = new List<RichTextNode>();
@@ -35,7 +35,7 @@ namespace ModClient.MessageService.HackChat
 
                     //order usernames from long length to short. This means that smaller usernames embedded in larger ones are not detected
                     //eg @hi will no get detected if the string is "@hiClient"
-                    foreach (var username in serviceBase.OnlineUsers.OrderByDescending(s => s.Length))
+                    foreach (var username in service.OnlineUsers.OrderByDescending(s => s.Length))
                     {
                         var index = str.IndexOf(username, nextSearchStart, StringComparison.OrdinalIgnoreCase);
                         if (index != -1)

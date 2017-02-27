@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModClient.MessageService;
 using ModClient.MessageService.HackChat;
+using ModClient.Plugin;
 using ModClientWinFormUI.Properties;
 
 namespace ModClientWinFormUI
@@ -22,12 +19,12 @@ namespace ModClientWinFormUI
             Icon = Icon.FromHandle(Resources.icon.GetHicon());
         }
 
-        private void AddTab(MessageServiceBase serviceBase)
+        private void AddTab(MessageServiceBase service)
         {
-            var newTab = new TabPage()
+            var newTab = new TabPage
             {
-                Controls = {new ChatView() {Dock = DockStyle.Fill, ServiceBase = serviceBase}},
-                Text = serviceBase.Username + "@" + serviceBase.Channel
+                Controls = {new ChatView {Dock = DockStyle.Fill, Service = service}},
+                Text = service.Username + "@" + service.Channel
             };
             tabControl1.TabPages.Add(newTab);
             tabControl1.SelectedTab = newTab;
@@ -39,7 +36,7 @@ namespace ModClientWinFormUI
             selectionWin.ShowDialog();
             if (selectionWin.DialogResult == DialogResult.OK)
             {
-                AddTab(new HackChatMessageServiceBase(selectionWin.Username, selectionWin.Password, selectionWin.Channel));
+                AddTab(new HackChatMessageService(selectionWin.Username, selectionWin.Password, selectionWin.Channel));
             }
         }
 
@@ -50,7 +47,7 @@ namespace ModClientWinFormUI
 
             foreach (var control in selected.Controls)
             {
-                (control as ChatView)?.ServiceBase.Close();
+                (control as ChatView)?.Service.Close();
             }
 
             tabControl1.TabPages.Remove(selected);
@@ -60,19 +57,27 @@ namespace ModClientWinFormUI
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             foreach (var page in tabControl1.TabPages)
-            foreach (var control in ((TabPage) page).Controls)
-                (control as ChatView)?.ServiceBase.Close();
+            foreach (var control in ((TabPage) page).Controls.OfType<ChatView>())
+                control.Service.Close();
         }
 
         private void devChatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTab(new HackChatMessageServiceBase("ModClient_test", "test", "botDev"));
+            AddTab(new HackChatMessageService("ModClient_test", "test", "botDev"));
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             linkLabel1.LinkVisited = true;
-            System.Diagnostics.Process.Start("https://github.com/JaxForReal/ModClient/");
+            Process.Start("https://github.com/JaxForReal/ModClient/");
+        }
+
+        private void addPluginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var control in tabControl1.SelectedTab.Controls.OfType<ChatView>())
+            {
+                control.Service.AddPlugin(new EchoPlugin(control.Service));
+            }
         }
     }
 }

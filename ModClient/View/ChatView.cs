@@ -11,7 +11,7 @@ namespace ModClient.View
 {
     public class ChatView
     {
-        private HackChatMessageServiceBase serviceBase;
+        private HackChatMessageService service;
         private ConsoleColor[] usernameColors = {Blue, Cyan, Red, Magenta};
 
         public ChatView()
@@ -28,13 +28,13 @@ namespace ModClient.View
             var pass = Console.ReadLine();
             Console.Clear();
 
-            serviceBase = new HackChatMessageServiceBase(username, pass, chan);
-            //serviceBase.OnJoinLeave += (isJoin, user) => Console.WriteLine(user + (isJoin ? " joined." : " left."));
-            serviceBase.OnMessageRecieved += OnMessageRevieved;
+            service = new HackChatMessageService(username, pass, chan);
+            //service.OnJoinLeave += (isJoin, user) => Console.WriteLine(user + (isJoin ? " joined." : " left."));
+            service.OnMessageRecieved += OnMessageRevieved;
 
             while (true)
             {
-                serviceBase.SendMessage(Console.ReadLine());
+                service.SendMessage(Console.ReadLine());
                 Console.CursorTop--;
             }
         }

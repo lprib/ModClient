@@ -107,12 +107,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModClient\ModClient.csproj">
-      <Project>{74d6dd84-1543-42fd-a03a-fbe73e2d9423}</Project>
-      <Name>ModClient</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +120,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bug_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModClient\ModClient.csproj">
+      <Project>{74d6dd84-1543-42fd-a03a-fbe73e2d9423}</Project>
+      <Name>ModClient</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\script_add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

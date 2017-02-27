@@ -7,11 +7,11 @@ namespace ModClient.Plugin
     //also has the ability to preprocess text before it is sent to the backend/server
     public abstract class PluginBase
     {
-        protected MessageService.MessageServiceBase ParentServiceBase;
+        protected MessageService.MessageServiceBase ParentService;
 
-        public PluginBase(MessageService.MessageServiceBase serviceBase)
+        public PluginBase(MessageService.MessageServiceBase service)
         {
-            ParentServiceBase = serviceBase;
+            ParentService = service;
         }
 
         //return null if no message should be sent

@@ -12,13 +12,13 @@ using ModClient.Plugin;
 
 namespace ModClient.MessageService.HackChat
 {
-    public class HackChatMessageServiceBase : MessageServiceBase
+    public class HackChatMessageService : MessageServiceBase
     {
         private readonly WebSocket webSocket;
         private readonly Thread pingThread;
 
 
-        public HackChatMessageServiceBase(string username, string password, string channel)
+        public HackChatMessageService(string username, string password, string channel)
         {
             Username = username;
             Channel = channel;
