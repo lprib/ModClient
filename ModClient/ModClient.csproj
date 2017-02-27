@@ -52,10 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageService\InfoType.cs" />
+    <Compile Include="Plugin\EchoPluginBase.cs" />
+    <Compile Include="Plugin\PluginBase.cs" />
     <Compile Include="View\ChatView.cs" />
-    <Compile Include="MessageService\HackChat\HackChatMessageService.cs" />
+    <Compile Include="MessageService\HackChat\HackChatMessageServiceBase.cs" />
     <Compile Include="MessageService\HackChat\HackChatTextParser.cs" />
-    <Compile Include="MessageService\IMessageService.cs" />
+    <Compile Include="MessageService\MessageServiceBase.cs" />
     <Compile Include="MessageService\InfoMessage.cs" />
     <Compile Include="MessageService\Message.cs" />
     <Compile Include="MessageService\RichTextNode.cs" />
@@ -66,6 +68,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

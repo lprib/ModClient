@@ -17,19 +17,19 @@ namespace ModClientWinFormUI
 {
     public partial class ChatView : UserControl
     {
-        private IMessageService service;
+        private MessageServiceBase serviceBase;
 
         [Browsable(false)]
-        public IMessageService Service
+        public MessageServiceBase ServiceBase
         {
-            get { return service; }
+            get { return serviceBase; }
             set
             {
-                service = value;
+                serviceBase = value;
                 if (value == null)
                     throw new NullReferenceException();
-                Service.OnMessageRecieved += AddMessage;
-                Service.OnInfoRecieved += AddInfo;
+                ServiceBase.OnMessageRecieved += AddMessage;
+                ServiceBase.OnInfoRecieved += AddInfo;
             }
         }
 
@@ -59,6 +59,7 @@ namespace ModClientWinFormUI
                 (sender, args) =>
                 {
                     messageInputBox.AppendText("@" + (UsernameStyle as UsernameStyle)?.GetText(args.Marker) + " ");
+                    messageInputBox.Select();
                 };
             chatBox.AppendText("\n");
         }
@@ -119,7 +120,7 @@ namespace ModClientWinFormUI
         {
             if (e.KeyCode == Keys.Enter && !e.Shift)
             {
-                Service.SendMessage(messageInputBox.Text);
+                ServiceBase.SendMessage(messageInputBox.Text);
                 messageInputBox.Clear();
                 e.SuppressKeyPress = true;
             }
@@ -137,7 +138,7 @@ namespace ModClientWinFormUI
         //used when the tab is closed
         public void Close()
         {
-            Service.Close();
+            ServiceBase.Close();
         }
     }
 }

@@ -8,24 +8,17 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
+using ModClient.Plugin;
 
 namespace ModClient.MessageService.HackChat
 {
-    public class HackChatMessageService : IMessageService
+    public class HackChatMessageServiceBase : MessageServiceBase
     {
-        public string Channel { get; }
-        public string Username { get; }
-
-        public IList<string> OnlineUsers { get; private set; }
-
-        public event MessageRecievedDelegate OnMessageRecieved;
-        public event InfoRecievedDelegate OnInfoRecieved;
-
-        private WebSocket webSocket;
-        private Thread pingThread;
+        private readonly WebSocket webSocket;
+        private readonly Thread pingThread;
 
 
-        public HackChatMessageService(string username, string password, string channel)
+        public HackChatMessageServiceBase(string username, string password, string channel)
         {
             Username = username;
             Channel = channel;
@@ -80,41 +73,41 @@ namespace ModClient.MessageService.HackChat
                     var message = new Message(nick, trip, text, richText, text.ToLower().Contains(Username.ToLower()),
                         time);
 
-                    OnMessageRecieved?.Invoke(message);
+                    OnMessageRecievedInternal(message);
                     break;
                 case "onlineSet":
                     OnlineUsers = messageJson["nicks"].ToObject<List<string>>();
-                    OnInfoRecieved?.Invoke(InfoType.OnlineSet, OnlineUsers);
+                    OnInfoRecievedInternal(InfoType.OnlineSet, OnlineUsers);
                     break;
                 case "onlineAdd":
                     var addNick = (string) messageJson["nick"];
                     OnlineUsers.Add(addNick);
-                    OnInfoRecieved?.Invoke(InfoType.OnlineAdd, addNick);
+                    OnInfoRecievedInternal(InfoType.OnlineAdd, addNick);
                     break;
                 case "onlineRemove":
                     var removeNick = (string) messageJson["nick"];
                     OnlineUsers.Remove(removeNick);
-                    OnInfoRecieved?.Invoke(InfoType.OnlineRemove, removeNick);
+                    OnInfoRecievedInternal(InfoType.OnlineRemove, removeNick);
                     break;
                 case "warn":
                     var warnText = (string) messageJson["text"];
                     switch (warnText)
                     {
                         case "Nickname must consist of up to 24 letters, numbers, and underscores":
-                            OnInfoRecieved?.Invoke(InfoType.InvalidUsername, warnText);
+                            OnInfoRecievedInternal(InfoType.InvalidUsername, warnText);
                             break;
                         case "Cannot impersonate the admin":
-                            OnInfoRecieved?.Invoke(InfoType.ImpersonatingAdmin, warnText);
+                            OnInfoRecievedInternal(InfoType.ImpersonatingAdmin, warnText);
                             break;
                         case "Nickname taken":
-                            OnInfoRecieved?.Invoke(InfoType.UsernameTaken, warnText);
+                            OnInfoRecievedInternal(InfoType.UsernameTaken, warnText);
                             break;
                         case "You are joining channels too fast. Wait a moment and try again.":
-                            OnInfoRecieved?.Invoke(InfoType.ChannelRatelimit, warnText);
+                            OnInfoRecievedInternal(InfoType.ChannelRatelimit, warnText);
                             break;
                         case "You are sending too much text. Wait a moment and try again.\n" +
                              "Press the up arrow key to restore your last message.":
-                            OnInfoRecieved?.Invoke(InfoType.MessageRatelimit, warnText);
+                            OnInfoRecievedInternal(InfoType.MessageRatelimit, warnText);
                             break;
                         default:
                             Console.WriteLine("Unrecognised warning:\n" + e.Data);
@@ -129,14 +122,17 @@ namespace ModClient.MessageService.HackChat
             }
         }
 
-        public void SendMessage(string message)
+        public override void SendMessage(string message)
         {
+            message = PluginProcess(message);
+            if (message == null) return;
+
             var serialized =
                 JsonConvert.SerializeObject(new Dictionary<string, string> {{"cmd", "chat"}, {"text", message}});
             webSocket.Send(serialized);
         }
 
-        public void Close()
+        public override void Close()
         {
             webSocket.Close();
         }

@@ -9,9 +9,9 @@ namespace ModClient.MessageService.HackChat
     //statically Parses an incoming message string into a list of RichTextNodes.
     static class HackChatTextParser
     {
-        private static Regex latex = new Regex(@"\$[^\$]*\$");
+        private static readonly Regex latex = new Regex(@"\$[^\$]*\$");
 
-        public static List<RichTextNode> GetRichText(string text, IMessageService service)
+        public static List<RichTextNode> GetRichText(string text, MessageServiceBase serviceBase)
         {
             //start with a single plaintext node conatining the entire text
             var richText = new List<RichTextNode>();
@@ -35,7 +35,7 @@ namespace ModClient.MessageService.HackChat
 
                     //order usernames from long length to short. This means that smaller usernames embedded in larger ones are not detected
                     //eg @hi will no get detected if the string is "@hiClient"
-                    foreach (var username in service.OnlineUsers.OrderByDescending(s => s.Length))
+                    foreach (var username in serviceBase.OnlineUsers.OrderByDescending(s => s.Length))
                     {
                         var index = str.IndexOf(username, nextSearchStart, StringComparison.OrdinalIgnoreCase);
                         if (index != -1)
@@ -80,11 +80,11 @@ namespace ModClient.MessageService.HackChat
                 foreach (var slice in matches)
                 {
                     //surrounding plaintext
-                    insertList.Add(new RichTextNode(textNode.Value.Substring(lastSliceEnd, slice.index - lastSliceEnd),
+                    insertList.Add(new RichTextNode(textNode.Value.Substring(lastSliceEnd, slice.Index - lastSliceEnd),
                         RichTextNode.NodeType.TEXT));
                     //formatted text node
-                    insertList.Add(new RichTextNode(textNode.Value.Substring(slice.index, slice.length), newNodeType));
-                    lastSliceEnd = slice.index + slice.length;
+                    insertList.Add(new RichTextNode(textNode.Value.Substring(slice.Index, slice.Length), newNodeType));
+                    lastSliceEnd = slice.Index + slice.Length;
                 }
                 //end padding text node
                 insertList.Add(new RichTextNode(textNode.Value.Substring(lastSliceEnd), RichTextNode.NodeType.TEXT));
@@ -99,20 +99,20 @@ namespace ModClient.MessageService.HackChat
                 latex.Matches(str)
                     .Cast<Match>()
                     .Select(match => new StringSlice(match.Index, match.Length))
-                    .Where(slice => slice.length > 0)
+                    .Where(slice => slice.Length > 0)
                     .ToList();
 
         // represends a slice of a string
         // used internally here to represend the slice of a string that contains latex or a username
         private struct StringSlice
         {
-            public readonly int index;
-            public readonly int length;
+            public readonly int Index;
+            public readonly int Length;
 
             public StringSlice(int index, int length)
             {
-                this.index = index;
-                this.length = length;
+                Index = index;
+                Length = length;
             }
         }
     }

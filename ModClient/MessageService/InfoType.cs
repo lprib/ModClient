@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModClient.MessageService
 {
-    //the type of info that was recieved from a MessageService
+    //the type of info that was recieved from a MessageServiceBase
     public enum InfoType
     {
         #region Hack.chat events

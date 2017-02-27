@@ -22,12 +22,12 @@ namespace ModClientWinFormUI
             Icon = Icon.FromHandle(Resources.icon.GetHicon());
         }
 
-        private void AddTab(IMessageService service)
+        private void AddTab(MessageServiceBase serviceBase)
         {
             var newTab = new TabPage()
             {
-                Controls = {new ChatView() {Dock = DockStyle.Fill, Service = service}},
-                Text = service.Username + "@" + service.Channel
+                Controls = {new ChatView() {Dock = DockStyle.Fill, ServiceBase = serviceBase}},
+                Text = serviceBase.Username + "@" + serviceBase.Channel
             };
             tabControl1.TabPages.Add(newTab);
             tabControl1.SelectedTab = newTab;
@@ -39,7 +39,7 @@ namespace ModClientWinFormUI
             selectionWin.ShowDialog();
             if (selectionWin.DialogResult == DialogResult.OK)
             {
-                AddTab(new HackChatMessageService(selectionWin.Username, selectionWin.Password, selectionWin.Channel));
+                AddTab(new HackChatMessageServiceBase(selectionWin.Username, selectionWin.Password, selectionWin.Channel));
             }
         }
 
@@ -50,7 +50,7 @@ namespace ModClientWinFormUI
 
             foreach (var control in selected.Controls)
             {
-                (control as ChatView)?.Service.Close();
+                (control as ChatView)?.ServiceBase.Close();
             }
 
             tabControl1.TabPages.Remove(selected);
@@ -61,12 +61,12 @@ namespace ModClientWinFormUI
         {
             foreach (var page in tabControl1.TabPages)
             foreach (var control in ((TabPage) page).Controls)
-                (control as ChatView)?.Service.Close();
+                (control as ChatView)?.ServiceBase.Close();
         }
 
         private void devChatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTab(new HackChatMessageService("ModClient_test", "test", "botDev"));
+            AddTab(new HackChatMessageServiceBase("ModClient_test", "test", "botDev"));
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
