@@ -27,6 +27,7 @@ namespace ModClient.MessageService
 
         public event MessageRecievedDelegate OnMessageRecieved;
         public event InfoRecievedDelegate OnInfoRecieved;
+        public event PluginOutputDelegate OnPluginOutput;
 
         public abstract void SendMessage(string message);
         public abstract void Close();
@@ -34,6 +35,8 @@ namespace ModClient.MessageService
         public void AddPlugin(PluginBase plugin)
         {
             Plugins.Add(plugin);
+            //capture all the output from running plugins, and re-transmit it through the OnPluginOutput event
+            plugin.OnPluginOutput += message => OnPluginOutput?.Invoke(message);
         }
 
         //call this within the SendMessage Fucntion
@@ -50,7 +53,7 @@ namespace ModClient.MessageService
             return message;
         }
 
-        protected virtual void OnMessageRecievedInternal(Message message) => OnMessageRecieved?.Invoke(message);
-        protected virtual void OnInfoRecievedInternal(InfoType type, object data) => OnInfoRecieved?.Invoke(type, data);
+        protected void OnMessageRecievedInternal(Message message) => OnMessageRecieved?.Invoke(message);
+        protected void OnInfoRecievedInternal(InfoType type, object data) => OnInfoRecieved?.Invoke(type, data);
     }
 }

@@ -16,7 +16,6 @@ namespace ModClient.Plugin
 
         public override string PreprocessOutgoingMessage(string message)
         {
-            Console.WriteLine("henlo");
             message = Regex.Replace(message, "who", "whom'st've");
             message = Regex.Replace(message, "[bcdgp]", "🅱️");
 

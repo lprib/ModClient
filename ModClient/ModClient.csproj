@@ -53,8 +53,8 @@
   <ItemGroup>
     <Compile Include="MessageService\InfoType.cs" />
     <Compile Include="Plugin\BibbaPlugin.cs" />
-    <Compile Include="Plugin\EchoPlugin.cs" />
     <Compile Include="Plugin\PluginBase.cs" />
+    <Compile Include="Plugin\TextCorrectionPlugin.cs" />
     <Compile Include="View\ChatView.cs" />
     <Compile Include="MessageService\HackChat\HackChatMessageService.cs" />
     <Compile Include="MessageService\HackChat\HackChatTextParser.cs" />

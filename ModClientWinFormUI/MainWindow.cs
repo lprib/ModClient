@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -12,11 +13,24 @@ namespace ModClientWinFormUI
 {
     public partial class MainWindow : Form
     {
+        //the type MUST inherit from PluginBase, or there will be runtime errors
+        private List<Tuple<string, Type>> plugins = new List<Tuple<string, Type>>
+        {
+            Tuple.Create("Bibba", typeof(BibbaPlugin)),
+            Tuple.Create("Text Corrector", typeof(TextCorrectionPlugin))
+        };
+
         public MainWindow()
         {
             InitializeComponent();
             //load icon from resources
             Icon = Icon.FromHandle(Resources.icon.GetHicon());
+
+            foreach (var pluginTuple in plugins)
+            {
+                AddPluginToList(pluginTuple.Item1, pluginTuple.Item2);
+            }
+            ((ToolStripDropDownMenu)addPluginToolStripMenuItem.DropDown).ShowImageMargin = false;
         }
 
         private void AddTab(MessageServiceBase service)
@@ -78,6 +92,18 @@ namespace ModClientWinFormUI
             {
                 control.Service.AddPlugin(new BibbaPlugin(control.Service));
             }
+        }
+
+        private void AddPluginToList(string name, Type pluginType)
+        {
+            var newItem = new ToolStripMenuItem {Text = name};
+            //retrieves the current service on run
+            Func<MessageServiceBase> service = () => tabControl1.SelectedTab.Controls.OfType<ChatView>().First().Service;
+
+            newItem.Click += (o, a) =>
+                service().AddPlugin((PluginBase)Activator.CreateInstance(pluginType, service()));
+
+            addPluginToolStripMenuItem.DropDownItems.Add(newItem);
         }
     }
 }

@@ -73,13 +73,14 @@
             this.chatBox.CharWidth = 9;
             this.chatBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.chatBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.chatBox.Font = new System.Drawing.Font("Everson Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chatBox.Font = new System.Drawing.Font("Everson Mono", 11.25F);
+            this.chatBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.chatBox.IsReplaceMode = false;
             this.chatBox.Location = new System.Drawing.Point(0, 0);
             this.chatBox.Name = "chatBox";
             this.chatBox.Paddings = new System.Windows.Forms.Padding(0);
             this.chatBox.ReadOnly = true;
-            this.chatBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.chatBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(76)))), ((int)(((byte)(175)))), ((int)(((byte)(80)))));
             this.chatBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("chatBox.ServiceColors")));
             this.chatBox.ShowLineNumbers = false;
             this.chatBox.Size = new System.Drawing.Size(626, 375);

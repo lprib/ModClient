@@ -30,6 +30,7 @@ namespace ModClientWinFormUI
                     throw new NullReferenceException();
                 Service.OnMessageRecieved += AddMessage;
                 Service.OnInfoRecieved += AddInfo;
+                Service.OnPluginOutput += output => AppendStyle(output + "\n", PluginOutputStyle);
             }
         }
 
@@ -50,6 +51,9 @@ namespace ModClientWinFormUI
 
         private static readonly Style SelfMentionStyle =
             new TextStyle(new SolidBrush(Color.FromArgb(244, 67, 54)), null, FontStyle.Regular);
+
+        private static readonly Style PluginOutputStyle =
+            new TextStyle(new SolidBrush(Color.FromArgb(103, 58, 183)), null, FontStyle.Regular);
 
         public ChatView()
         {
@@ -75,6 +79,10 @@ namespace ModClientWinFormUI
                 chatBox.AppendText(" ");
                 AppendStyle(message.SenderName, UsernameStyle);
                 chatBox.AppendText(": ");
+
+                //if multiline message, make every line on its own line
+                if (message.PlainText.Contains("\n"))
+                    chatBox.AppendText("\n");
 
                 foreach (var node in message.RichText)
                 {
