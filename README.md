@@ -3,7 +3,9 @@ C# client for online messaging services.
 
 ##Features:
 * **Modular backends**: you can write a simple backend so that ModClient can connect to any type of message service.
-* **Plugins**: plugins augment incoming and outgoing messages, so you can write bots or helpful internal functions as an add-on.
+* **Plugins**: plugins augment incoming and outgoing messages, so you can write bots or helpful internal functions as an add-on.  
+
+![](http://i.imgur.com/6yaJoBC.png) ![](http://i.imgur.com/nJHTfij.png)  
 
 ##Plugin API:
 * Plugins must inherit from `PluginBase`
