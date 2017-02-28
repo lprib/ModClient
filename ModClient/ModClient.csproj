@@ -52,12 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageService\InfoType.cs" />
+    <Compile Include="Plugin\BibbaPlugin.cs" />
     <Compile Include="Plugin\EchoPlugin.cs" />
     <Compile Include="Plugin\PluginBase.cs" />
     <Compile Include="View\ChatView.cs" />
     <Compile Include="MessageService\HackChat\HackChatMessageService.cs" />
     <Compile Include="MessageService\HackChat\HackChatTextParser.cs" />
-    <Compile Include="MessageService\MessageService.cs" />
+    <Compile Include="MessageService\MessageServiceBase.cs" />
     <Compile Include="MessageService\InfoMessage.cs" />
     <Compile Include="MessageService\Message.cs" />
     <Compile Include="MessageService\RichTextNode.cs" />

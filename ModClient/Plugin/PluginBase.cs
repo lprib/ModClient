@@ -7,14 +7,18 @@ namespace ModClient.Plugin
     //also has the ability to preprocess text before it is sent to the backend/server
     public abstract class PluginBase
     {
-        protected MessageService.MessageServiceBase ParentService;
+        protected MessageServiceBase ParentService;
 
-        public PluginBase(MessageService.MessageServiceBase service)
+        //plugins can override the setter here to do certain things on enable/disable
+        public virtual bool Enabled { get; set; } = true;
+
+        public PluginBase(MessageServiceBase service)
         {
             ParentService = service;
         }
 
         //return null if no message should be sent
+        //only called if plugin.Enabled == true
         public virtual string PreprocessOutgoingMessage(string message) => message;
     }
 }

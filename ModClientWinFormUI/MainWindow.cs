@@ -76,7 +76,7 @@ namespace ModClientWinFormUI
         {
             foreach (var control in tabControl1.SelectedTab.Controls.OfType<ChatView>())
             {
-                control.Service.AddPlugin(new EchoPlugin(control.Service));
+                control.Service.AddPlugin(new BibbaPlugin(control.Service));
             }
         }
     }

@@ -16,14 +16,14 @@ namespace ModClient.MessageService
         public MessageServiceBase()
         {
             OnlineUsers = new List<string>();
-            Plugins = new List<Plugin.PluginBase>();
+            Plugins = new List<PluginBase>();
         }
 
         public string Username { get; protected set; }
         public string Channel { get; protected set; }
 
         public IList<string> OnlineUsers { get; protected set; }
-        public IList<Plugin.PluginBase> Plugins { get; protected set; }
+        public IList<PluginBase> Plugins { get; protected set; }
 
         public event MessageRecievedDelegate OnMessageRecieved;
         public event InfoRecievedDelegate OnInfoRecieved;
@@ -31,7 +31,7 @@ namespace ModClient.MessageService
         public abstract void SendMessage(string message);
         public abstract void Close();
 
-        public void AddPlugin(Plugin.PluginBase plugin)
+        public void AddPlugin(PluginBase plugin)
         {
             Plugins.Add(plugin);
         }
@@ -42,7 +42,9 @@ namespace ModClient.MessageService
         {
             foreach (var plugin in Plugins)
             {
-                message = plugin.PreprocessOutgoingMessage(message);
+                if (plugin.Enabled)
+                    message = plugin.PreprocessOutgoingMessage(message);
+
                 if (message == null) break;
             }
             return message;
