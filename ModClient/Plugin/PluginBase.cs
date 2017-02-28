@@ -26,6 +26,6 @@ namespace ModClient.Plugin
         //only called if plugin.Enabled == true
         public virtual string PreprocessOutgoingMessage(string message) => message;
 
-        protected void OnPluginOutputInternal(string message) => OnPluginOutput?.Invoke(message);
+        protected void PluginOutput(string message) => OnPluginOutput?.Invoke(message);
     }
 }
