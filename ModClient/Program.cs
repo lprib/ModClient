@@ -12,7 +12,7 @@ namespace ModClient
     {
         static void Main(string[] args)
         {
-            new ChatView().Run();
+            new ConsoleChatView().Run();
         }
     }
 }

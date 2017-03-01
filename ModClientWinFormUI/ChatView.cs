@@ -88,13 +88,13 @@ namespace ModClientWinFormUI
                 {
                     switch (node.Type)
                     {
-                        case RichTextNode.NodeType.TEXT:
+                        case RichTextNode.NodeType.Text:
                             AppendStyle(node.Value, message.IsSelfMention ? SelfMentionStyle : null);
                             break;
-                        case RichTextNode.NodeType.FORMATTED:
+                        case RichTextNode.NodeType.Formatted:
                             AppendStyle(node.Value, LatexStyle);
                             break;
-                        case RichTextNode.NodeType.USERNAME:
+                        case RichTextNode.NodeType.Username:
                             AppendStyle(node.Value, UsernameStyle);
                             break;
                     }

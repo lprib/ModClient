@@ -9,12 +9,12 @@ using static System.ConsoleColor;
 
 namespace ModClient.View
 {
-    public class ChatView
+    public class ConsoleChatView
     {
         private HackChatMessageService service;
         private ConsoleColor[] usernameColors = {Blue, Cyan, Red, Magenta};
 
-        public ChatView()
+        public ConsoleChatView()
         {
         }
 
@@ -46,13 +46,13 @@ namespace ModClient.View
             {
                 switch (node.Type)
                 {
-                    case RichTextNode.NodeType.TEXT:
+                    case RichTextNode.NodeType.Text:
                         WriteColor(node.Value, message.IsSelfMention ? Green : White);
                         break;
-                    case RichTextNode.NodeType.USERNAME:
+                    case RichTextNode.NodeType.Username:
                         WriteColor(node.Value, GetConsoleColor(node.Value));
                         break;
-                    case RichTextNode.NodeType.FORMATTED:
+                    case RichTextNode.NodeType.Formatted:
                         WriteColor(node.Value, Yellow);
                         break;
                 }

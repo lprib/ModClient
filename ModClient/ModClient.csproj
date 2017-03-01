@@ -55,7 +55,7 @@
     <Compile Include="Plugin\BibbaPlugin.cs" />
     <Compile Include="Plugin\PluginBase.cs" />
     <Compile Include="Plugin\TextCorrectionPlugin.cs" />
-    <Compile Include="View\ChatView.cs" />
+    <Compile Include="View\ConsoleChatView.cs" />
     <Compile Include="MessageService\HackChat\HackChatMessageService.cs" />
     <Compile Include="MessageService\HackChat\HackChatTextParser.cs" />
     <Compile Include="MessageService\MessageServiceBase.cs" />

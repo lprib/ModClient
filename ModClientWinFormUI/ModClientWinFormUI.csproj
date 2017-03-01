@@ -76,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsClasses.cs" />
     <Compile Include="UsernameStyle.cs" />
     <EmbeddedResource Include="ChatSelectionWindow.resx">
       <DependentUpon>ChatSelectionWindow.cs</DependentUpon>

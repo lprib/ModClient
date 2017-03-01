@@ -15,13 +15,13 @@ namespace ModClient.MessageService.HackChat
         {
             //start with a single plaintext node conatining the entire text
             var richText = new List<RichTextNode>();
-            richText.Add(new RichTextNode(text, RichTextNode.NodeType.TEXT));
+            richText.Add(new RichTextNode(text, RichTextNode.NodeType.Text));
 
             //chunkify using the results of a regexp match
             Chunkify(
                 richText,
                 GetChunkifyMatcher(latex),
-                RichTextNode.NodeType.FORMATTED
+                RichTextNode.NodeType.Formatted
             );
 
             Chunkify(
@@ -46,7 +46,7 @@ namespace ModClient.MessageService.HackChat
                     }
                     return slices;
                 },
-                RichTextNode.NodeType.USERNAME
+                RichTextNode.NodeType.Username
             );
 
             return richText;
@@ -61,7 +61,7 @@ namespace ModClient.MessageService.HackChat
         private static void Chunkify(List<RichTextNode> startingList, Func<string, List<StringSlice>> matcher,
             RichTextNode.NodeType newNodeType)
         {
-            var textNodes = startingList.Where(node => (node.Type == RichTextNode.NodeType.TEXT)).ToList();
+            var textNodes = startingList.Where(node => (node.Type == RichTextNode.NodeType.Text)).ToList();
             //examine each plaintext node
             for (int iter = textNodes.Count - 1; iter >= 0; iter--)
             {
@@ -81,13 +81,13 @@ namespace ModClient.MessageService.HackChat
                 {
                     //surrounding plaintext
                     insertList.Add(new RichTextNode(textNode.Value.Substring(lastSliceEnd, slice.Index - lastSliceEnd),
-                        RichTextNode.NodeType.TEXT));
+                        RichTextNode.NodeType.Text));
                     //formatted text node
                     insertList.Add(new RichTextNode(textNode.Value.Substring(slice.Index, slice.Length), newNodeType));
                     lastSliceEnd = slice.Index + slice.Length;
                 }
                 //end padding text node
-                insertList.Add(new RichTextNode(textNode.Value.Substring(lastSliceEnd), RichTextNode.NodeType.TEXT));
+                insertList.Add(new RichTextNode(textNode.Value.Substring(lastSliceEnd), RichTextNode.NodeType.Text));
 
                 //insert back into original list
                 startingList.InsertRange(insertIndex, insertList);

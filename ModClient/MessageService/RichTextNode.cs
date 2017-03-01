@@ -9,9 +9,9 @@
 
         public enum NodeType
         {
-            TEXT,
-            USERNAME,
-            FORMATTED
+            Text,
+            Username,
+            Formatted
         }
 
         public RichTextNode(string value, NodeType type)
