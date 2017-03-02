@@ -14,17 +14,34 @@ namespace ModClient.Plugin
         //pugins can supply output messages to the user
         internal event PluginOutputDelegate OnPluginOutput;
 
-        //plugins can override the setter here to do certain things on enable/disable
-        public virtual bool Enabled { get; set; } = true;
+        private bool enabled;
+
+        public bool Enabled
+        {
+            get { return enabled; }
+            set
+            {
+                if (!enabled && value)
+                    OnEnabled();
+                if(enabled && !value)
+                    OnDisabled();
+                enabled = value;
+            }
+        }
 
         public PluginBase(MessageServiceBase service)
         {
             ParentService = service;
+            Enabled = true;
         }
 
         //return null if no message should be sent
         //only called if plugin.Enabled == true
         public virtual string PreprocessOutgoingMessage(string message) => message;
+
+        protected virtual void OnEnabled() {}
+
+        protected virtual void OnDisabled() {}
 
         protected void PluginOutput(string message) => OnPluginOutput?.Invoke(message);
     }

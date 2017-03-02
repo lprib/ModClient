@@ -17,7 +17,8 @@ namespace ModClientWinFormUI
         private List<Tuple<string, Type>> plugins = new List<Tuple<string, Type>>
         {
             Tuple.Create("Bibba", typeof(BibbaPlugin)),
-            Tuple.Create("Text Corrector", typeof(TextCorrectionPlugin))
+            Tuple.Create("Text Corrector", typeof(TextCorrectionPlugin)),
+            Tuple.Create("Automatic Response", typeof(ResponsePlugin)),
         };
 
         public MainWindow()
