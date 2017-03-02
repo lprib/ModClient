@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ModClient.MessageService
+﻿namespace ModClient.MessageService
 {
     //the type of info that was recieved from a MessageServiceBase
     public enum InfoType

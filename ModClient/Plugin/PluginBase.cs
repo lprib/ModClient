@@ -9,12 +9,14 @@ namespace ModClient.Plugin
     //also has the ability to preprocess text before it is sent to the backend/server
     public abstract class PluginBase
     {
+        private bool enabled;
         protected MessageServiceBase ParentService;
 
-        //pugins can supply output messages to the user
-        internal event PluginOutputDelegate OnPluginOutput;
-
-        private bool enabled;
+        protected PluginBase(MessageServiceBase service)
+        {
+            ParentService = service;
+            Enabled = true;
+        }
 
         public bool Enabled
         {
@@ -23,25 +25,26 @@ namespace ModClient.Plugin
             {
                 if (!enabled && value)
                     OnEnabled();
-                if(enabled && !value)
+                if (enabled && !value)
                     OnDisabled();
                 enabled = value;
             }
         }
 
-        public PluginBase(MessageServiceBase service)
-        {
-            ParentService = service;
-            Enabled = true;
-        }
+        //pugins can supply output messages to the user
+        internal event PluginOutputDelegate OnPluginOutput;
 
         //return null if no message should be sent
         //only called if plugin.Enabled == true
         public virtual string PreprocessOutgoingMessage(string message) => message;
 
-        protected virtual void OnEnabled() {}
+        protected virtual void OnEnabled()
+        {
+        }
 
-        protected virtual void OnDisabled() {}
+        protected virtual void OnDisabled()
+        {
+        }
 
         protected void PluginOutput(string message) => OnPluginOutput?.Invoke(message);
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.Generic;
 using ModClient.Plugin;
 
 namespace ModClient.MessageService
@@ -13,7 +10,7 @@ namespace ModClient.MessageService
     //a service that fires events in the event of an incoming message, and includes the ability to send messages
     public abstract class MessageServiceBase
     {
-        public MessageServiceBase()
+        protected MessageServiceBase()
         {
             OnlineUsers = new List<string>();
             Plugins = new List<PluginBase>();

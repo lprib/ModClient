@@ -1,26 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using ModClient.MessageService;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System;
+using System.Text.RegularExpressions;
 
 namespace ModClient.MessageService.HackChat
 {
     //statically Parses an incoming message string into a list of RichTextNodes.
-    static class HackChatTextParser
+    internal static class HackChatTextParser
     {
-        private static readonly Regex latex = new Regex(@"\$[^\$]*\$");
+        private static readonly Regex Latex = new Regex(@"\$[^\$]*\$");
 
         public static List<RichTextNode> GetRichText(string text, MessageServiceBase service)
         {
             //start with a single plaintext node conatining the entire text
-            var richText = new List<RichTextNode>();
-            richText.Add(new RichTextNode(text, RichTextNode.NodeType.Text));
+            var richText = new List<RichTextNode> {new RichTextNode(text, RichTextNode.NodeType.Text)};
 
             //chunkify using the results of a regexp match
             Chunkify(
                 richText,
-                GetChunkifyMatcher(latex),
+                GetChunkifyMatcher(Latex),
                 RichTextNode.NodeType.Formatted
             );
 
@@ -61,9 +59,9 @@ namespace ModClient.MessageService.HackChat
         private static void Chunkify(List<RichTextNode> startingList, Func<string, List<StringSlice>> matcher,
             RichTextNode.NodeType newNodeType)
         {
-            var textNodes = startingList.Where(node => (node.Type == RichTextNode.NodeType.Text)).ToList();
+            var textNodes = startingList.Where(node => node.Type == RichTextNode.NodeType.Text).ToList();
             //examine each plaintext node
-            for (int iter = textNodes.Count - 1; iter >= 0; iter--)
+            for (var iter = textNodes.Count - 1; iter >= 0; iter--)
             {
                 var textNode = textNodes[iter];
 
@@ -96,7 +94,7 @@ namespace ModClient.MessageService.HackChat
 
         private static Func<string, List<StringSlice>> GetChunkifyMatcher(Regex regex) =>
             str =>
-                latex.Matches(str)
+                regex.Matches(str)
                     .Cast<Match>()
                     .Select(match => new StringSlice(match.Index, match.Length))
                     .Where(slice => slice.Length > 0)

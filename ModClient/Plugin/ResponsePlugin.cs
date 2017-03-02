@@ -6,9 +6,9 @@ namespace ModClient.Plugin
 {
     public class ResponsePlugin : PluginBase
     {
-        private Dictionary<string, string> responses = new Dictionary<string, string>();
-        private const string trigger = "/response ";
-        private readonly Regex addResponseRegex = new Regex(@"^add ""([^""]+)"" ""([^""]+)""");
+        private static readonly string Trigger = "/response ";
+        private static readonly Regex AddResponseRegex = new Regex(@"^add ""([^""]+)"" ""([^""]+)""");
+        private readonly Dictionary<string, string> responses = new Dictionary<string, string>();
 
         public ResponsePlugin(MessageServiceBase service) : base(service)
         {
@@ -16,13 +16,13 @@ namespace ModClient.Plugin
 
         public override string PreprocessOutgoingMessage(string message)
         {
-            if (!message.StartsWith(trigger))
+            if (!message.StartsWith(Trigger))
                 return message;
 
-            var newMessage = message.Substring(trigger.Length);
+            var newMessage = message.Substring(Trigger.Length);
             if (newMessage.StartsWith("add"))
             {
-                var match = addResponseRegex.Match(newMessage);
+                var match = AddResponseRegex.Match(newMessage);
                 var newTrigger = match.Groups[1].Value;
                 var newResponse = match.Groups[2].Value;
                 responses.Add(newTrigger, newResponse);
@@ -47,12 +47,8 @@ namespace ModClient.Plugin
         private void OnMessage(Message message)
         {
             foreach (var response in responses)
-            {
                 if (message.PlainText.ToLower() == response.Key)
-                {
                     ParentService.SendMessage(response.Value);
-                }
-            }
         }
     }
 }

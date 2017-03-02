@@ -1,6 +1,6 @@
 ﻿namespace ModClient.MessageService
 {
-    class InfoMessage
+    internal class InfoMessage
     {
     }
 }

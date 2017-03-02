@@ -4,9 +4,6 @@
     //these nodes can be interpreted by the frontend for formatting
     public class RichTextNode
     {
-        public string Value { get; }
-        public NodeType Type { get; }
-
         public enum NodeType
         {
             Text,
@@ -19,5 +16,8 @@
             Value = value;
             Type = type;
         }
+
+        public string Value { get; }
+        public NodeType Type { get; }
     }
 }

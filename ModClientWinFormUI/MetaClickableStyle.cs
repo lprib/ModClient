@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using FastColoredTextBoxNS;
@@ -13,7 +12,8 @@ namespace ModClientWinFormUI
         //the clicker cannot get the text, so it must be stored in a dictionary for retrieval
         private readonly Dictionary<StyleVisualMarker, string> strings;
 
-        public MetaClickableStyle(Brush foreBrush, Brush backgroundBrush, FontStyle fontStyle) : base(foreBrush, backgroundBrush, fontStyle)
+        public MetaClickableStyle(Brush foreBrush, Brush backgroundBrush, FontStyle fontStyle)
+            : base(foreBrush, backgroundBrush, fontStyle)
         {
             strings = new Dictionary<StyleVisualMarker, string>();
         }

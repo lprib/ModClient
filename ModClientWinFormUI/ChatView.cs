@@ -1,40 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing.Text;
+using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
 using ModClient.MessageService;
-using ModClient.MessageService.HackChat;
-using ModClientWinFormUI.Properties;
+using Message = ModClient.MessageService.Message;
 
 namespace ModClientWinFormUI
 {
     public partial class ChatView : UserControl
     {
-        private MessageServiceBase service;
-
-        [Browsable(false)]
-        public MessageServiceBase Service
-        {
-            get { return service; }
-            set
-            {
-                service = value;
-                if (value == null)
-                    throw new NullReferenceException();
-                Service.OnMessageRecieved += AddMessage;
-                Service.OnInfoRecieved += AddInfo;
-                Service.OnPluginOutput += output => AppendStyle("\n" + output, PluginOutputStyle);
-            }
-        }
-
         private static readonly Style UsernameStyle =
             new MetaClickableStyle(new SolidBrush(Color.FromArgb(33, 150, 243)), null, FontStyle.Bold);
 
@@ -59,6 +37,8 @@ namespace ModClientWinFormUI
         private static readonly Style UrlStyle =
             new MetaClickableStyle(new SolidBrush(Color.FromArgb(236, 64, 122)), null, FontStyle.Regular);
 
+        private MessageServiceBase service;
+
         public ChatView()
         {
             InitializeComponent();
@@ -75,7 +55,22 @@ namespace ModClientWinFormUI
                 (sender, args) => { Process.Start(((MetaClickableStyle) UrlStyle).GetText(args.Marker)); };
         }
 
-        public void AddMessage(ModClient.MessageService.Message message)
+        [Browsable(false)]
+        public MessageServiceBase Service
+        {
+            get { return service; }
+            set
+            {
+                service = value;
+                if (value == null)
+                    throw new NullReferenceException();
+                Service.OnMessageRecieved += AddMessage;
+                Service.OnInfoRecieved += AddInfo;
+                Service.OnPluginOutput += output => AppendStyle("\n" + output, PluginOutputStyle);
+            }
+        }
+
+        public void AddMessage(Message message)
         {
             Invoke((MethodInvoker) (() =>
             {
@@ -94,7 +89,6 @@ namespace ModClientWinFormUI
                     chatBox.AppendText("\n");
 
                 foreach (var node in message.RichText)
-                {
                     switch (node.Type)
                     {
                         case RichTextNode.NodeType.Text:
@@ -107,7 +101,6 @@ namespace ModClientWinFormUI
                             AppendStyle(node.Value, UsernameStyle);
                             break;
                     }
-                }
             }));
         }
 
@@ -121,10 +114,10 @@ namespace ModClientWinFormUI
                         InfoStyle);
                     break;
                 case InfoType.OnlineAdd:
-                    AppendStyle(((string) data) + " joined.", InfoStyle);
+                    AppendStyle((string) data + " joined.", InfoStyle);
                     break;
                 case InfoType.OnlineRemove:
-                    AppendStyle(((string) data) + " left.", InfoStyle);
+                    AppendStyle((string) data + " left.", InfoStyle);
                     break;
                 default:
                     AppendStyle(type + "", InfoStyle);

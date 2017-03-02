@@ -1,22 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ModClientWinFormUI
 {
     public partial class ChatSelectionWindow : Form
     {
-        public string Server { get; set; }
-        public string Channel { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-
         public ChatSelectionWindow()
         {
             InitializeComponent();
@@ -25,6 +13,11 @@ namespace ModClientWinFormUI
             usernameCheckBox.DataBindings.Add("Text", this, "Username");
             passwordCheckBox.DataBindings.Add("Text", this, "Password");
         }
+
+        public string Server { get; set; }
+        public string Channel { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
 
         private void okButton_Click(object sender, EventArgs e)
         {

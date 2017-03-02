@@ -1,21 +1,16 @@
 ﻿using System;
-using WebSocketSharp;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-using ModClient.MessageService;
-using System.Linq;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
-using ModClient.Plugin;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using WebSocketSharp;
 
 namespace ModClient.MessageService.HackChat
 {
     public class HackChatMessageService : MessageServiceBase
     {
         private readonly WebSocket webSocket;
-        private readonly Thread pingThread;
 
 
         public HackChatMessageService(string username, string password, string channel)
@@ -23,7 +18,7 @@ namespace ModClient.MessageService.HackChat
             Username = username;
             Channel = channel;
 
-            pingThread = new Thread(() =>
+            var pingThread = new Thread(() =>
             {
                 while (true)
                 {

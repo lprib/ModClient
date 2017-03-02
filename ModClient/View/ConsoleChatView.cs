@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ModClient.MessageService;
 using ModClient.MessageService.HackChat;
 using static System.ConsoleColor;
@@ -11,12 +7,8 @@ namespace ModClient.View
 {
     public class ConsoleChatView
     {
+        private readonly ConsoleColor[] usernameColors = {Blue, Cyan, Red, Magenta};
         private HackChatMessageService service;
-        private ConsoleColor[] usernameColors = {Blue, Cyan, Red, Magenta};
-
-        public ConsoleChatView()
-        {
-        }
 
         public void Run()
         {
@@ -41,9 +33,8 @@ namespace ModClient.View
 
         private void OnMessageRevieved(Message message)
         {
-            Console.Write($"{message.Time :hh:mmtt} {message.SenderTrip + " " + message.SenderName ,25}: ");
+            Console.Write($"{message.Time :hh:mmtt} {message.SenderTrip + " " + message.SenderName,25}: ");
             foreach (var node in message.RichText)
-            {
                 switch (node.Type)
                 {
                     case RichTextNode.NodeType.Text:
@@ -56,7 +47,6 @@ namespace ModClient.View
                         WriteColor(node.Value, Yellow);
                         break;
                 }
-            }
             Console.WriteLine();
         }
 
