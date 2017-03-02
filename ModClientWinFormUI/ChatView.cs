@@ -65,13 +65,14 @@ namespace ModClientWinFormUI
                     messageInputBox.AppendText("@" + (UsernameStyle as UsernameStyle)?.GetText(args.Marker) + " ");
                     messageInputBox.Select();
                 };
-            chatBox.AppendText("\n");
         }
 
         public void AddMessage(ModClient.MessageService.Message message)
         {
             Invoke((MethodInvoker) (() =>
             {
+                chatBox.AppendText("\n");
+
                 AppendStyle("--", SelfMentionStyle);
                 AppendStyle(message.Time.ToString("hh:mmtt"), TimeStyle);
                 chatBox.AppendText(" ");
@@ -99,8 +100,6 @@ namespace ModClientWinFormUI
                             break;
                     }
                 }
-
-                chatBox.AppendText("\n");
             }));
         }
 
@@ -109,7 +108,7 @@ namespace ModClientWinFormUI
             switch (type)
             {
                 case InfoType.OnlineSet:
-                    AppendStyle("Online users: " + ((List<string>) data).Aggregate((a, i) => a + ", " + i) + "\n",
+                    AppendStyle(" Online users: " + ((List<string>) data).Aggregate((a, i) => a + ", " + i) + "\n",
                         InfoStyle);
                     break;
                 case InfoType.OnlineAdd:
@@ -139,7 +138,7 @@ namespace ModClientWinFormUI
             chatBox.AppendText(text);
 
             if (style == null || text == null) return;
-            var appendRange = chatBox.GetRange(chatBox.TextLength - text.Length - 1, chatBox.TextLength);
+            var appendRange = chatBox.GetRange(chatBox.TextLength - text.Length, chatBox.TextLength);
             appendRange.SetStyle(style);
         }
 
