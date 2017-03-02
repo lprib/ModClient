@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
@@ -30,12 +31,12 @@ namespace ModClientWinFormUI
                     throw new NullReferenceException();
                 Service.OnMessageRecieved += AddMessage;
                 Service.OnInfoRecieved += AddInfo;
-                Service.OnPluginOutput += output => AppendStyle(output + "\n", PluginOutputStyle);
+                Service.OnPluginOutput += output => AppendStyle("\n" + output, PluginOutputStyle);
             }
         }
 
         private static readonly Style UsernameStyle =
-            new UsernameStyle(new SolidBrush(Color.FromArgb(33, 150, 243)), null, FontStyle.Bold);
+            new MetaClickableStyle(new SolidBrush(Color.FromArgb(33, 150, 243)), null, FontStyle.Bold);
 
         private static readonly Style LatexStyle =
             new TextStyle(new SolidBrush(Color.FromArgb(255, 152, 0)), null, FontStyle.Regular);
@@ -55,6 +56,9 @@ namespace ModClientWinFormUI
         private static readonly Style PluginOutputStyle =
             new TextStyle(new SolidBrush(Color.FromArgb(103, 58, 183)), null, FontStyle.Regular);
 
+        private static readonly Style UrlStyle =
+            new MetaClickableStyle(new SolidBrush(Color.FromArgb(236, 64, 122)), null, FontStyle.Regular);
+
         public ChatView()
         {
             InitializeComponent();
@@ -62,9 +66,13 @@ namespace ModClientWinFormUI
             UsernameStyle.VisualMarkerClick +=
                 (sender, args) =>
                 {
-                    messageInputBox.AppendText("@" + (UsernameStyle as UsernameStyle)?.GetText(args.Marker) + " ");
+                    messageInputBox.AppendText("@" + ((MetaClickableStyle) UsernameStyle).GetText(args.Marker) + " ");
                     messageInputBox.Select();
                 };
+
+            //open urls on click
+            UrlStyle.VisualMarkerClick +=
+                (sender, args) => { Process.Start(((MetaClickableStyle) UrlStyle).GetText(args.Marker)); };
         }
 
         public void AddMessage(ModClient.MessageService.Message message)
@@ -75,7 +83,7 @@ namespace ModClientWinFormUI
 
                 AppendStyle("--", SelfMentionStyle);
                 AppendStyle(message.Time.ToString("hh:mmtt"), TimeStyle);
-                chatBox.AppendText(" ");
+                AppendStyle(" ");
                 AppendStyle(message.SenderTrip, TripStyle);
                 chatBox.AppendText(" ");
                 AppendStyle(message.SenderName, UsernameStyle);
@@ -105,20 +113,21 @@ namespace ModClientWinFormUI
 
         private void AddInfo(InfoType type, object data)
         {
+            AppendStyle("\n");
             switch (type)
             {
                 case InfoType.OnlineSet:
-                    AppendStyle(" Online users: " + ((List<string>) data).Aggregate((a, i) => a + ", " + i) + "\n",
+                    AppendStyle("Online users: " + ((List<string>) data).Aggregate((a, i) => a + ", " + i),
                         InfoStyle);
                     break;
                 case InfoType.OnlineAdd:
-                    AppendStyle(((string) data) + " joined.\n", InfoStyle);
+                    AppendStyle(((string) data) + " joined.", InfoStyle);
                     break;
                 case InfoType.OnlineRemove:
-                    AppendStyle(((string) data) + " left.\n", InfoStyle);
+                    AppendStyle(((string) data) + " left.", InfoStyle);
                     break;
                 default:
-                    AppendStyle(type + "\n", InfoStyle);
+                    AppendStyle(type + "", InfoStyle);
                     break;
             }
         }
@@ -133,13 +142,15 @@ namespace ModClientWinFormUI
             }
         }
 
-        private void AppendStyle(string text, Style style)
+        private void AppendStyle(string text, Style style = null)
         {
             chatBox.AppendText(text);
 
-            if (style == null || text == null) return;
+            style = style ?? chatBox.DefaultStyle;
+
             var appendRange = chatBox.GetRange(chatBox.TextLength - text.Length, chatBox.TextLength);
             appendRange.SetStyle(style);
+            appendRange.SetStyle(UrlStyle, @"http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?");
         }
 
         //used when the tab is closed

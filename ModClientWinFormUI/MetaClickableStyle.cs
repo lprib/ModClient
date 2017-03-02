@@ -5,13 +5,15 @@ using FastColoredTextBoxNS;
 
 namespace ModClientWinFormUI
 {
-    //this is a custom style for all usernames that allows clicking, and retrieving of the text that was clicked
-    public class UsernameStyle : TextStyle
+    //this is a custom style that, when clicked, can return the text that was clicked.
+    //retrieve this by using the GetText(marker), and pass in the VisualMarkerEvenArgs.Marker
+    //this is supplied within the OnVisualMarkerClick event
+    public class MetaClickableStyle : TextStyle
     {
         //the clicker cannot get the text, so it must be stored in a dictionary for retrieval
-        private Dictionary<StyleVisualMarker, string> strings;
+        private readonly Dictionary<StyleVisualMarker, string> strings;
 
-        public UsernameStyle(Brush foreBrush, Brush backgroundBrush, FontStyle fontStyle) : base(foreBrush, backgroundBrush, fontStyle)
+        public MetaClickableStyle(Brush foreBrush, Brush backgroundBrush, FontStyle fontStyle) : base(foreBrush, backgroundBrush, fontStyle)
         {
             strings = new Dictionary<StyleVisualMarker, string>();
         }
