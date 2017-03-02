@@ -31,7 +31,7 @@ namespace ModClientWinFormUI
             {
                 AddPluginToList(pluginTuple.Item1, pluginTuple.Item2);
             }
-            ((ToolStripDropDownMenu)addPluginToolStripMenuItem.DropDown).ShowImageMargin = false;
+            ((ToolStripDropDownMenu) addPluginToolStripMenuItem.DropDown).ShowImageMargin = false;
         }
 
         private void AddTab(MessageServiceBase service)
@@ -99,12 +99,22 @@ namespace ModClientWinFormUI
         {
             var newItem = new ToolStripMenuItem {Text = name};
             //retrieves the current service on run
-            Func<MessageServiceBase> service = () => tabControl1.SelectedTab.Controls.OfType<ChatView>().First().Service;
+            Func<MessageServiceBase> service =
+                () => tabControl1.SelectedTab.Controls.OfType<ChatView>().First().Service;
 
             newItem.Click += (o, a) =>
-                service().AddPlugin((PluginBase)Activator.CreateInstance(pluginType, service()));
+            {
+                if (tabControl1.SelectedTab.Controls.OfType<ChatView>().Any())
+                {
+                    service().AddPlugin((PluginBase) Activator.CreateInstance(pluginType, service()));
+                }
+            };
 
             addPluginToolStripMenuItem.DropDownItems.Add(newItem);
+        }
+
+        private void enableAndDisableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
         }
     }
 }
