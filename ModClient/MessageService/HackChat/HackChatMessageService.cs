@@ -12,7 +12,6 @@ namespace ModClient.MessageService.HackChat
     {
         private readonly WebSocket webSocket;
 
-
         public HackChatMessageService(string username, string password, string channel)
         {
             Username = username;
@@ -35,18 +34,20 @@ namespace ModClient.MessageService.HackChat
                 }
             });
 
-            webSocket = new WebSocket("wss://hack.chat/chat-ws");
+            webSocket = new WebSocket(Url);
             webSocket.OnMessage += OnWebSocketMessage;
             webSocket.OnOpen +=
                 (s, args) =>
                 {
-                    webSocket.Send(
-                        $"{{\"cmd\": \"join\", \"channel\": \"{Channel}\", \"nick\": \"{Username}#{password}\"}}");
+                    webSocket.Send(GetJoinString(username, password, channel));
                     pingThread.Start();
                 };
             webSocket.OnClose += (s, args) => pingThread.Interrupt();
             webSocket.Connect();
         }
+
+        public override string ServiceName { get; } = "Hack.chat";
+        protected virtual string Url { get; } = "wss://hack.chat/chat-ws";
 
         private void OnWebSocketMessage(object sender, MessageEventArgs e)
         {
@@ -130,6 +131,14 @@ namespace ModClient.MessageService.HackChat
         public override void Close()
         {
             webSocket.Close();
+            //NOTE pingthread gets interruped within webSocket.OnClose
+        }
+
+        //move into separate method so toastychat can override
+
+        protected virtual string GetJoinString(string username, string password, string channel)
+        {
+            return $"{{\"cmd\": \"join\", \"channel\": \"{channel}\", \"nick\": \"{username}#{password}\"}}";
         }
     }
 }

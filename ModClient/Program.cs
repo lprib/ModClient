@@ -4,7 +4,7 @@ namespace ModClient
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             new ConsoleChatView().Run();
         }

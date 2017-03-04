@@ -19,6 +19,10 @@ namespace ModClient.MessageService
         public string Username { get; protected set; }
         public string Channel { get; protected set; }
 
+        //base classes override to set their name
+        //sorta like a static overrideable value
+        public abstract string ServiceName { get; }
+
         public IList<string> OnlineUsers { get; protected set; }
         public IList<PluginBase> Plugins { get; protected set; }
 

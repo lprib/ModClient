@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using ModClient.MessageService;
+using ModClient.MessageService.HackChat;
+using ModClient.MessageService.ToastyChat;
 
 namespace ModClientWinFormUI
 {
@@ -8,20 +11,28 @@ namespace ModClientWinFormUI
         public ChatSelectionWindow()
         {
             InitializeComponent();
-            serverTextBox.DataBindings.Add("Text", this, "Server");
-            channelTextBox.DataBindings.Add("Text", this, "Channel");
-            usernameCheckBox.DataBindings.Add("Text", this, "Username");
-            passwordCheckBox.DataBindings.Add("Text", this, "Password");
+//            serverTextBox.DataBindings.Add("Text", this, "Server");
+//            channelTextBox.DataBindings.Add("Text", this, "Channel");
+//            usernameTextBox.DataBindings.Add("Text", this, "Username");
+//            passwordTextBox.DataBindings.Add("Text", this, "Password");
         }
 
-        public string Server { get; set; }
-        public string Channel { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public MessageServiceBase MessageService { get; private set; }
 
         private void okButton_Click(object sender, EventArgs e)
         {
             Close();
+            switch ((string) connectionTypeCombo.SelectedItem)
+            {
+                case "Hack.chat":
+                    MessageService = new HackChatMessageService(usernameTextBox.Text, passwordTextBox.Text,
+                        channelTextBox.Text);
+                    break;
+                case "Toasty.chat":
+                    MessageService = new ToastyChatMessageService(usernameTextBox.Text, passwordTextBox.Text,
+                        channelTextBox.Text);
+                    break;
+            }
             DialogResult = DialogResult.OK;
         }
 

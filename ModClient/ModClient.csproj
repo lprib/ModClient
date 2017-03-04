@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageService\InfoType.cs" />
+    <Compile Include="MessageService\ToastyChat\ToastyChatMessageService.cs" />
     <Compile Include="Plugin\BibbaPlugin.cs" />
     <Compile Include="Plugin\PluginBase.cs" />
     <Compile Include="Plugin\ResponsePlugin.cs" />
@@ -60,14 +61,15 @@
     <Compile Include="MessageService\HackChat\HackChatMessageService.cs" />
     <Compile Include="MessageService\HackChat\HackChatTextParser.cs" />
     <Compile Include="MessageService\MessageServiceBase.cs" />
-    <Compile Include="MessageService\InfoMessage.cs" />
     <Compile Include="MessageService\Message.cs" />
     <Compile Include="MessageService\RichTextNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

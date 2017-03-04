@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -13,21 +12,13 @@ namespace ModClientWinFormUI
 {
     public partial class MainWindow : Form
     {
-        //the type MUST inherit from PluginBase, or there will be runtime errors
-        private readonly List<Tuple<string, Type>> plugins = new List<Tuple<string, Type>>
-        {
-            Tuple.Create("Bibba", typeof(BibbaPlugin)),
-            Tuple.Create("Text Corrector", typeof(TextCorrectionPlugin)),
-            Tuple.Create("Automatic Response", typeof(ResponsePlugin))
-        };
-
         public MainWindow()
         {
             InitializeComponent();
             //load icon from resources
             Icon = Icon.FromHandle(Resources.icon.GetHicon());
 
-            foreach (var pluginTuple in plugins)
+            foreach (var pluginTuple in DefaultSettings.DefaultPlugins)
                 AddPluginToList(pluginTuple.Item1, pluginTuple.Item2);
             ((ToolStripDropDownMenu) addPluginToolStripMenuItem.DropDown).ShowImageMargin = false;
         }
@@ -48,7 +39,7 @@ namespace ModClientWinFormUI
             var selectionWin = new ChatSelectionWindow();
             selectionWin.ShowDialog();
             if (selectionWin.DialogResult == DialogResult.OK)
-                AddTab(new HackChatMessageService(selectionWin.Username, selectionWin.Password, selectionWin.Channel));
+                AddTab(selectionWin.MessageService);
         }
 
         private void closeTabButton_Click(object sender, EventArgs e)

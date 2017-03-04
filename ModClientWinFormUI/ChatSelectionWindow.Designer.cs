@@ -33,8 +33,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.channelTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.usernameCheckBox = new System.Windows.Forms.TextBox();
-            this.passwordCheckBox = new System.Windows.Forms.TextBox();
+            this.usernameTextBox = new System.Windows.Forms.TextBox();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -49,7 +49,8 @@
             this.connectionTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.connectionTypeCombo.FormattingEnabled = true;
             this.connectionTypeCombo.Items.AddRange(new object[] {
-            "Hack.Chat"});
+            "Hack.chat",
+            "Toasty.chat"});
             this.connectionTypeCombo.Location = new System.Drawing.Point(107, 10);
             this.connectionTypeCombo.Name = "connectionTypeCombo";
             this.connectionTypeCombo.Size = new System.Drawing.Size(158, 21);
@@ -80,7 +81,7 @@
             this.channelTextBox.Location = new System.Drawing.Point(107, 64);
             this.channelTextBox.Name = "channelTextBox";
             this.channelTextBox.Size = new System.Drawing.Size(158, 20);
-            this.channelTextBox.TabIndex = 3;
+            this.channelTextBox.TabIndex = 2;
             // 
             // label3
             // 
@@ -91,24 +92,24 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Channel";
             // 
-            // usernameCheckBox
+            // usernameTextBox
             // 
-            this.usernameCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.usernameCheckBox.Location = new System.Drawing.Point(107, 90);
-            this.usernameCheckBox.Name = "usernameCheckBox";
-            this.usernameCheckBox.Size = new System.Drawing.Size(158, 20);
-            this.usernameCheckBox.TabIndex = 5;
+            this.usernameTextBox.Location = new System.Drawing.Point(107, 90);
+            this.usernameTextBox.Name = "usernameTextBox";
+            this.usernameTextBox.Size = new System.Drawing.Size(158, 20);
+            this.usernameTextBox.TabIndex = 3;
             // 
-            // passwordCheckBox
+            // passwordTextBox
             // 
-            this.passwordCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.passwordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.passwordCheckBox.Location = new System.Drawing.Point(107, 116);
-            this.passwordCheckBox.Name = "passwordCheckBox";
-            this.passwordCheckBox.Size = new System.Drawing.Size(158, 20);
-            this.passwordCheckBox.TabIndex = 6;
-            this.passwordCheckBox.UseSystemPasswordChar = true;
+            this.passwordTextBox.Location = new System.Drawing.Point(107, 116);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(158, 20);
+            this.passwordTextBox.TabIndex = 4;
+            this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // label4
             // 
@@ -125,7 +126,7 @@
             this.okButton.Location = new System.Drawing.Point(189, 143);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 8;
+            this.okButton.TabIndex = 5;
             this.okButton.Text = "Connect";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
@@ -136,7 +137,7 @@
             this.cancelButton.Location = new System.Drawing.Point(108, 143);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 9;
+            this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -157,7 +158,7 @@
             this.serverTextBox.Location = new System.Drawing.Point(107, 38);
             this.serverTextBox.Name = "serverTextBox";
             this.serverTextBox.Size = new System.Drawing.Size(158, 20);
-            this.serverTextBox.TabIndex = 11;
+            this.serverTextBox.TabIndex = 1;
             // 
             // ChatSelectionWindow
             // 
@@ -169,8 +170,8 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.passwordCheckBox);
-            this.Controls.Add(this.usernameCheckBox);
+            this.Controls.Add(this.passwordTextBox);
+            this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.channelTextBox);
             this.Controls.Add(this.label2);
@@ -191,8 +192,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox channelTextBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox usernameCheckBox;
-        private System.Windows.Forms.TextBox passwordCheckBox;
+        private System.Windows.Forms.TextBox usernameTextBox;
+        private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;

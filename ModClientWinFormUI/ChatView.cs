@@ -135,11 +135,13 @@ namespace ModClientWinFormUI
             }
         }
 
+        //TODO null is getting passed in here as text at some point...
         private void AppendStyle(string text, Style style = null)
         {
             chatBox.AppendText(text);
 
             style = style ?? chatBox.DefaultStyle;
+            text = text ?? "";
 
             var appendRange = chatBox.GetRange(chatBox.TextLength - text.Length, chatBox.TextLength);
             appendRange.SetStyle(style);
