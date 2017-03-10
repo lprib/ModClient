@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ModClient.MessageService.HackChat;
-using ModClient.MessageService.ToastyChat;
 using ModClient.Plugin;
 
 namespace ModClientWinFormUI
@@ -17,12 +15,6 @@ namespace ModClientWinFormUI
             Tuple.Create("Bibba", typeof(BibbaPlugin)),
             Tuple.Create("Text Corrector", typeof(TextCorrectionPlugin)),
             Tuple.Create("Automatic Response", typeof(ResponsePlugin))
-        };
-
-        public static List<Tuple<string, Type>> DefaultMessageServices = new List<Tuple<string, Type>>
-        {
-            Tuple.Create("Hack.chat", typeof(HackChatMessageService)),
-            Tuple.Create("Toasty.chat", typeof(ToastyChatMessageService))
         };
     }
 }

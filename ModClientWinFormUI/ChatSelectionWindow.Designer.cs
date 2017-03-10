@@ -50,7 +50,9 @@
             this.connectionTypeCombo.FormattingEnabled = true;
             this.connectionTypeCombo.Items.AddRange(new object[] {
             "Hack.chat",
-            "Toasty.chat"});
+            "Toasty.chat",
+            "IRC",
+            "Chatto"});
             this.connectionTypeCombo.Location = new System.Drawing.Point(107, 10);
             this.connectionTypeCombo.Name = "connectionTypeCombo";
             this.connectionTypeCombo.Size = new System.Drawing.Size(158, 21);

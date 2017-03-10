@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using ModClient.MessageService;
+using ModClient.MessageService.Chatto;
 using ModClient.MessageService.HackChat;
+using ModClient.MessageService.Irc;
 using ModClient.MessageService.ToastyChat;
 
 namespace ModClientWinFormUI
@@ -31,6 +33,12 @@ namespace ModClientWinFormUI
                 case "Toasty.chat":
                     MessageService = new ToastyChatMessageService(usernameTextBox.Text, passwordTextBox.Text,
                         channelTextBox.Text);
+                    break;
+                case "IRC":
+                    MessageService = new IrcMessageService(serverTextBox.Text, channelTextBox.Text, usernameTextBox.Text, passwordTextBox.Text);
+                    break;
+                case "Chatto":
+                    MessageService = new ChattoMessageService(serverTextBox.Text, usernameTextBox.Text, passwordTextBox.Text, channelTextBox.Text);
                     break;
             }
             DialogResult = DialogResult.OK;
