@@ -14,7 +14,8 @@ namespace ModClientWinFormUI
         {
             Tuple.Create("Bibba", typeof(BibbaPlugin)),
             Tuple.Create("Text Corrector", typeof(TextCorrectionPlugin)),
-            Tuple.Create("Automatic Response", typeof(ResponsePlugin))
+            Tuple.Create("Automatic Response", typeof(ResponsePlugin)),
+            Tuple.Create("options test", typeof(ConfigOptionsTest))
         };
     }
 }

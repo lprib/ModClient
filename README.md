@@ -18,3 +18,5 @@ Subscribe to `MessageServiceBase.OnMessageRecieved` or `MessageServiceBase.OnInf
 You can augment messages before they are sent.
 `return null` from this method to capture the message so nothing is sent to the server.
 (This is useful for plugin-specific commands that don't need to get forwarded to the chat server)
+
+##TODO

@@ -65,7 +65,9 @@
     <Compile Include="MessageService\Irc\IrcMessageService.cs" />
     <Compile Include="MessageService\ToastyChat\ToastyChatMessageService.cs" />
     <Compile Include="Plugin\BibbaPlugin.cs" />
+    <Compile Include="Plugin\ConfigOptionsTest.cs" />
     <Compile Include="Plugin\PluginBase.cs" />
+    <Compile Include="Plugin\PluginUserInterface.cs" />
     <Compile Include="Plugin\ResponsePlugin.cs" />
     <Compile Include="Plugin\TextCorrectionPlugin.cs" />
     <Compile Include="View\ConsoleChatView.cs" />

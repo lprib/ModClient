@@ -24,5 +24,7 @@ namespace ModClient.Plugin
             previousMessage = message;
             return message;
         }
+
+        public override string ToString() => "Text Corrector";
     }
 }

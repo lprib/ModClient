@@ -17,10 +17,6 @@ namespace ModClientWinFormUI
             InitializeComponent();
             //load icon from resources
             Icon = Icon.FromHandle(Resources.icon.GetHicon());
-
-            foreach (var pluginTuple in DefaultSettings.DefaultPlugins)
-                AddPluginToList(pluginTuple.Item1, pluginTuple.Item2);
-            ((ToolStripDropDownMenu) addPluginToolStripMenuItem.DropDown).ShowImageMargin = false;
         }
 
         private void AddTab(MessageServiceBase service)
@@ -78,7 +74,7 @@ namespace ModClientWinFormUI
                 control.Service.AddPlugin(new BibbaPlugin(control.Service));
         }
 
-        private void AddPluginToList(string name, Type pluginType)
+        /*private void AddPluginToList(string name, Type pluginType)
         {
             var newItem = new ToolStripMenuItem {Text = name};
             //retrieves the current service on run
@@ -92,10 +88,15 @@ namespace ModClientWinFormUI
             };
 
             addPluginToolStripMenuItem.DropDownItems.Add(newItem);
-        }
+        }*/
 
         private void enableAndDisableToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var pluginManager = new PluginManager
+            {
+                Service = tabControl1.SelectedTab.Controls.OfType<ChatView>().First().Service
+            };
+            pluginManager.Show();
         }
     }
 }

@@ -50,5 +50,7 @@ namespace ModClient.Plugin
                 if (message.PlainText.ToLower() == response.Key)
                     ParentService.SendMessage(response.Value);
         }
+
+        public override string ToString() => "Automated Response";
     }
 }

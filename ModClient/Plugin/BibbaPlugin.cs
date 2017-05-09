@@ -16,5 +16,7 @@ namespace ModClient.Plugin
 
             return message;
         }
+
+        public override string ToString() => "Bibba";
     }
 }

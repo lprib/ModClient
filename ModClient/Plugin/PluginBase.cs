@@ -1,4 +1,5 @@
-﻿using ModClient.MessageService;
+﻿using System.Collections.Generic;
+using ModClient.MessageService;
 
 namespace ModClient.Plugin
 {
@@ -47,5 +48,11 @@ namespace ModClient.Plugin
         }
 
         protected void PluginOutput(string message) => OnPluginOutput?.Invoke(message);
+
+        //override this and return a list to enable options
+        public virtual List<ConfigOption> GetConfigOptions()
+        {
+            return new List<ConfigOption>();
+        }
     }
 }

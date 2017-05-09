@@ -31,27 +31,26 @@
             this.components = new System.ComponentModel.Container();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newChatToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.devChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableAndDisableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startTab = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.closeTabButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.defaultStartButton = new System.Windows.Forms.Button();
-            this.newChatToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.devChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addPluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enableAndDisableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.closeTabButton = new System.Windows.Forms.Button();
             this.newChatMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeTabToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainMenuStrip.SuspendLayout();
             this.startTab.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -75,15 +74,52 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
+            // newChatToolStripMenuItem1
+            // 
+            this.newChatToolStripMenuItem1.Image = global::ModClientWinFormUI.Properties.Resources.add;
+            this.newChatToolStripMenuItem1.Name = "newChatToolStripMenuItem1";
+            this.newChatToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
+            this.newChatToolStripMenuItem1.Text = "&New Chat...";
+            this.newChatToolStripMenuItem1.Click += new System.EventHandler(this.addTab_Click);
+            // 
+            // devChatToolStripMenuItem
+            // 
+            this.devChatToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.bug_add;
+            this.devChatToolStripMenuItem.Name = "devChatToolStripMenuItem";
+            this.devChatToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.devChatToolStripMenuItem.Text = "&Dev Chat";
+            this.devChatToolStripMenuItem.Click += new System.EventHandler(this.devChatToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.cog;
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.settingsToolStripMenuItem.Text = "&Settings...";
+            // 
             // pluginsToolStripMenuItem
             // 
             this.pluginsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addPluginToolStripMenuItem,
             this.enableAndDisableToolStripMenuItem,
             this.importToolStripMenuItem});
             this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
             this.pluginsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.pluginsToolStripMenuItem.Text = "&Plugins";
+            // 
+            // enableAndDisableToolStripMenuItem
+            // 
+            this.enableAndDisableToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_edit;
+            this.enableAndDisableToolStripMenuItem.Name = "enableAndDisableToolStripMenuItem";
+            this.enableAndDisableToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.enableAndDisableToolStripMenuItem.Text = "&Enable and Disable...";
+            this.enableAndDisableToolStripMenuItem.Click += new System.EventHandler(this.enableAndDisableToolStripMenuItem_Click);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_go;
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.importToolStripMenuItem.Text = "&Import...";
             // 
             // startTab
             // 
@@ -124,30 +160,6 @@
             this.label1.Text = "ModClient v0.1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.startTab);
-            this.tabControl1.Location = new System.Drawing.Point(0, 27);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(363, 228);
-            this.tabControl1.TabIndex = 1;
-            // 
-            // closeTabButton
-            // 
-            this.closeTabButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.closeTabButton.Image = global::ModClientWinFormUI.Properties.Resources.cancel;
-            this.closeTabButton.Location = new System.Drawing.Point(338, 0);
-            this.closeTabButton.Name = "closeTabButton";
-            this.closeTabButton.Size = new System.Drawing.Size(25, 25);
-            this.closeTabButton.TabIndex = 2;
-            this.closeTabToolTip.SetToolTip(this.closeTabButton, "Close Tab");
-            this.closeTabButton.UseVisualStyleBackColor = true;
-            this.closeTabButton.Click += new System.EventHandler(this.closeTabButton_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -176,44 +188,29 @@
             this.defaultStartButton.UseVisualStyleBackColor = true;
             this.defaultStartButton.Click += new System.EventHandler(this.addTab_Click);
             // 
-            // newChatToolStripMenuItem1
+            // tabControl1
             // 
-            this.newChatToolStripMenuItem1.Image = global::ModClientWinFormUI.Properties.Resources.add;
-            this.newChatToolStripMenuItem1.Name = "newChatToolStripMenuItem1";
-            this.newChatToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.newChatToolStripMenuItem1.Text = "&New Chat...";
-            this.newChatToolStripMenuItem1.Click += new System.EventHandler(this.addTab_Click);
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.startTab);
+            this.tabControl1.Location = new System.Drawing.Point(0, 27);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(363, 228);
+            this.tabControl1.TabIndex = 1;
             // 
-            // devChatToolStripMenuItem
+            // closeTabButton
             // 
-            this.devChatToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.bug_add;
-            this.devChatToolStripMenuItem.Name = "devChatToolStripMenuItem";
-            this.devChatToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.devChatToolStripMenuItem.Text = "&Dev Chat";
-            this.devChatToolStripMenuItem.Click += new System.EventHandler(this.devChatToolStripMenuItem_Click);
-            // 
-            // addPluginToolStripMenuItem
-            // 
-            this.addPluginToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_add;
-            this.addPluginToolStripMenuItem.Name = "addPluginToolStripMenuItem";
-            this.addPluginToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.addPluginToolStripMenuItem.Text = "&Add";
-            this.addPluginToolStripMenuItem.Click += new System.EventHandler(this.addPluginToolStripMenuItem_Click);
-            // 
-            // enableAndDisableToolStripMenuItem
-            // 
-            this.enableAndDisableToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_edit;
-            this.enableAndDisableToolStripMenuItem.Name = "enableAndDisableToolStripMenuItem";
-            this.enableAndDisableToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.enableAndDisableToolStripMenuItem.Text = "&Enable and Disable...";
-            this.enableAndDisableToolStripMenuItem.Click += new System.EventHandler(this.enableAndDisableToolStripMenuItem_Click);
-            // 
-            // importToolStripMenuItem
-            // 
-            this.importToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_go;
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.importToolStripMenuItem.Text = "&Import...";
+            this.closeTabButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.closeTabButton.Image = global::ModClientWinFormUI.Properties.Resources.cancel;
+            this.closeTabButton.Location = new System.Drawing.Point(338, 0);
+            this.closeTabButton.Name = "closeTabButton";
+            this.closeTabButton.Size = new System.Drawing.Size(25, 25);
+            this.closeTabButton.TabIndex = 2;
+            this.closeTabToolTip.SetToolTip(this.closeTabButton, "Close Tab");
+            this.closeTabButton.UseVisualStyleBackColor = true;
+            this.closeTabButton.Click += new System.EventHandler(this.closeTabButton_Click);
             // 
             // newChatMenuItem
             // 
@@ -231,13 +228,6 @@
             this.newChatToolStripMenuItem.Text = "New Chat";
             this.newChatToolStripMenuItem.Click += new System.EventHandler(this.addTab_Click);
             // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.cog;
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.settingsToolStripMenuItem.Text = "&Settings...";
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,8 +244,8 @@
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             this.startTab.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,7 +267,6 @@
         private System.Windows.Forms.Button closeTabButton;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addPluginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enableAndDisableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
