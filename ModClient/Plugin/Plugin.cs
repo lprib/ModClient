@@ -14,6 +14,9 @@ namespace ModClient.Plugin
         private bool enabled;
         protected MessageServiceBase ParentService;
 
+        //override this to provide your own config options
+        public virtual List<ConfigOption> ConfigOptions { get; } = new List<ConfigOption>();
+
         protected Plugin(MessageServiceBase service)
         {
             ParentService = service;
@@ -49,13 +52,6 @@ namespace ModClient.Plugin
         }
 
         protected void PluginOutput(string message) => OnPluginOutput?.Invoke(message);
-
-        //override this and return a list to enable options
-        public virtual List<ConfigOption> GetConfigOptions()
-        {
-            return new List<ConfigOption>();
-        }
-
 
         public static List<Tuple<string, Type>> DefaultPlugins = new List<Tuple<string, Type>>
         {

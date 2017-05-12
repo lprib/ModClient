@@ -65,6 +65,7 @@
             this.removePluginButton.TabIndex = 2;
             this.removePluginButton.Text = "Remove";
             this.removePluginButton.UseVisualStyleBackColor = true;
+            this.removePluginButton.Click += new System.EventHandler(this.removePluginButton_Click);
             // 
             // newPluginComboBox
             // 

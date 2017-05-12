@@ -6,6 +6,8 @@ namespace ModClient.Plugin
 {
     public class ResponsePlugin : Plugin
     {
+        public override List<ConfigOption> ConfigOptions => options;
+
         private List<ConfigOption> options = new List<ConfigOption>()
         {
             new ConfigOption("Trigger", ConfigOption.Type.Text) {Data = "/response"}
@@ -20,7 +22,7 @@ namespace ModClient.Plugin
 
         public override string PreprocessOutgoingMessage(string message)
         {
-            var trigger = (string)options[0].Data;
+            var trigger = (string) options[0].Data;
             if (!message.StartsWith(trigger))
                 return message;
 
@@ -55,7 +57,5 @@ namespace ModClient.Plugin
                 if (message.PlainText.ToLower() == response.Key)
                     ParentService.SendMessage(response.Value);
         }
-
-        public override List<ConfigOption> GetConfigOptions() => options;
     }
 }

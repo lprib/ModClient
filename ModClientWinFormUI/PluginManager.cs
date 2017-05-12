@@ -29,6 +29,10 @@ namespace ModClientWinFormUI
             }
         }
 
+        private Button currentSelectedPluginButton;
+
+        private Dictionary<Button, Plugin> activePluginButtons = new Dictionary<Button, Plugin>();
+
         public PluginManager()
         {
             InitializeComponent();
@@ -60,12 +64,15 @@ namespace ModClientWinFormUI
                 Text = plugin.ToString()
             };
 
+            activePluginButtons[activePluginButton] = plugin;
+
             //when the active plugin is clicked in the list, load up its config options in the options panel
             activePluginButton.Click +=
                 (sender, args) =>
                 {
                     pluginOptionsPanel.Controls.Clear();
                     pluginOptionsPanel.Controls.Add(GetOptionsPanel(plugin));
+                    currentSelectedPluginButton = activePluginButton;
                 };
 
             activePluginsList.Controls.Add(activePluginButton);
@@ -87,10 +94,10 @@ namespace ModClientWinFormUI
                 CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
             };
 
-            for (int configOptionIndex = 0; configOptionIndex < plugin.GetConfigOptions().Count; configOptionIndex++)
+            for (int configOptionIndex = 0; configOptionIndex < plugin.ConfigOptions.Count; configOptionIndex++)
             {
-                var configOption = plugin.GetConfigOptions()[configOptionIndex];
-                panel.Controls.Add(new Label {Text = configOption.ConfigName}, 0, configOptionIndex);
+                var configOption = plugin.ConfigOptions[configOptionIndex];
+                panel.Controls.Add(new Label {Text = configOption.Name}, 0, configOptionIndex);
                 panel.Controls.Add(getControl(configOption), 1, configOptionIndex);
             }
             return panel;
@@ -99,7 +106,7 @@ namespace ModClientWinFormUI
         private Control getControl(ConfigOption option)
         {
             Control control = null;
-            switch (option.ConfigType)
+            switch (option.DataType)
             {
                 case ConfigOption.Type.Boolean:
                     control = new CheckBox {Checked = (bool) option.Data};
@@ -114,16 +121,25 @@ namespace ModClientWinFormUI
                         if (keyArgs.KeyChar == (char) Keys.Enter)
                         {
                             option.Data = ((TextBox) control).Text;
+                            keyArgs.Handled = true;
                         }
                     };
                     break;
                 case ConfigOption.Type.Button:
-                    control = new Button {Text = option.ConfigName, Dock = DockStyle.Fill};
+                    control = new Button {Text = option.Name, Dock = DockStyle.Fill};
                     //increment data on click as per spec
                     control.Click += (s, a) => option.Data = (int) option.Data + 1;
                     break;
             }
             return control;
+        }
+
+        private void removePluginButton_Click(object sender, EventArgs e)
+        {
+            var pluginToRemove = activePluginButtons[currentSelectedPluginButton];
+            activePluginsList.Controls.Remove(currentSelectedPluginButton);
+            service.Plugins.Remove(pluginToRemove);
+            pluginOptionsPanel.Controls.Clear();
         }
     }
 }
