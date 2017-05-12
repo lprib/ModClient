@@ -9,6 +9,10 @@ namespace ModClient.Plugin
 {
     public delegate void OnConfigOptionChangedDelegate(object oldVal, object newVal);
 
+    /*If the option has ConfigType of button, the Data field should be an int. To say the button has been pressed, just increment the Data field.
+     * 
+     */
+
     public class ConfigOption
     {
         public string ConfigName { get; }
@@ -21,17 +25,30 @@ namespace ModClient.Plugin
             get { return data; }
             set
             {
-                OnConfigChanged?.Invoke(data, value);
+                OnChanged?.Invoke(data, value);
                 data = value;
             }
         }
 
-        public event OnConfigOptionChangedDelegate OnConfigChanged;
+        public event OnConfigOptionChangedDelegate OnChanged;
 
         public ConfigOption(string configName, Type configType)
         {
             ConfigName = configName;
             ConfigType = configType;
+
+            switch (ConfigType)
+            {
+                case Type.Boolean:
+                    Data = false;
+                    break;
+                case Type.Button:
+                    Data = 0;
+                    break;
+                case Type.Text:
+                    Data = "";
+                    break;
+            }
         }
 
         public enum Type

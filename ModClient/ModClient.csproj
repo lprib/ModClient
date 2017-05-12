@@ -64,12 +64,12 @@
     <Compile Include="MessageService\InfoType.cs" />
     <Compile Include="MessageService\Irc\IrcMessageService.cs" />
     <Compile Include="MessageService\ToastyChat\ToastyChatMessageService.cs" />
-    <Compile Include="Plugin\BibbaPlugin.cs" />
-    <Compile Include="Plugin\ConfigOptionsTest.cs" />
-    <Compile Include="Plugin\PluginBase.cs" />
+    <Compile Include="Plugin\DefaultPlugins\BibbaPlugin.cs" />
+    <Compile Include="Plugin\DefaultPlugins\ConfigOptionsTest.cs" />
+    <Compile Include="Plugin\Plugin.cs" />
     <Compile Include="Plugin\PluginUserInterface.cs" />
-    <Compile Include="Plugin\ResponsePlugin.cs" />
-    <Compile Include="Plugin\TextCorrectionPlugin.cs" />
+    <Compile Include="Plugin\DefaultPlugins\ResponsePlugin.cs" />
+    <Compile Include="Plugin\DefaultPlugins\TextCorrectionPlugin.cs" />
     <Compile Include="View\ConsoleChatView.cs" />
     <Compile Include="MessageService\HackChat\HackChatMessageService.cs" />
     <Compile Include="MessageService\HackChat\HackChatTextParser.cs" />

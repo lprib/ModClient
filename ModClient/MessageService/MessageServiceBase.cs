@@ -13,7 +13,7 @@ namespace ModClient.MessageService
         protected MessageServiceBase()
         {
             OnlineUsers = new List<string>();
-            Plugins = new List<PluginBase>();
+            Plugins = new List<Plugin.Plugin>();
         }
 
         public string Username { get; protected set; }
@@ -24,7 +24,7 @@ namespace ModClient.MessageService
         public abstract string ServiceName { get; }
 
         public IList<string> OnlineUsers { get; protected set; }
-        public IList<PluginBase> Plugins { get; protected set; }
+        public IList<Plugin.Plugin> Plugins { get; protected set; }
 
         public event MessageRecievedDelegate OnMessageRecieved;
         public event InfoRecievedDelegate OnInfoRecieved;
@@ -33,7 +33,7 @@ namespace ModClient.MessageService
         public abstract void SendMessage(string message);
         public abstract void Close();
 
-        public void AddPlugin(PluginBase plugin)
+        public void AddPlugin(Plugin.Plugin plugin)
         {
             Plugins.Add(plugin);
             //capture all the output from running plugins, and re-transmit it through the OnPluginOutput event

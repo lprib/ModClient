@@ -84,17 +84,24 @@ namespace ModClientWinFormUI
             newItem.Click += (o, a) =>
             {
                 if (tabControl1.SelectedTab.Controls.OfType<ChatView>().Any())
-                    service().AddPlugin((PluginBase) Activator.CreateInstance(pluginType, service()));
+                    service().AddPlugin((Plugin) Activator.CreateInstance(pluginType, service()));
             };
 
             addPluginToolStripMenuItem.DropDownItems.Add(newItem);
         }*/
 
-        private void enableAndDisableToolStripMenuItem_Click(object sender, EventArgs e)
+        private void pluginManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var service = tabControl1.SelectedTab.Controls.OfType<ChatView>().FirstOrDefault()?.Service;
+            if (service == null)
+            {
+                MessageBox.Show("No service running in the current tab.", "Cannot open Plugin Manager", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
             var pluginManager = new PluginManager
             {
-                Service = tabControl1.SelectedTab.Controls.OfType<ChatView>().First().Service
+                Service = service
             };
             pluginManager.Show();
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ModClient.MessageService;
 
 namespace ModClient.Plugin
@@ -8,12 +9,12 @@ namespace ModClient.Plugin
     //A plugin is a add-on to a MessageServiceBase
     //it can subscribe to all MessageServiceBase events, and send messages
     //also has the ability to preprocess text before it is sent to the backend/server
-    public abstract class PluginBase
+    public abstract class Plugin
     {
         private bool enabled;
         protected MessageServiceBase ParentService;
 
-        protected PluginBase(MessageServiceBase service)
+        protected Plugin(MessageServiceBase service)
         {
             ParentService = service;
             Enabled = true;
@@ -54,5 +55,14 @@ namespace ModClient.Plugin
         {
             return new List<ConfigOption>();
         }
+
+
+        public static List<Tuple<string, Type>> DefaultPlugins = new List<Tuple<string, Type>>
+        {
+            Tuple.Create("Bibba", typeof(BibbaPlugin)),
+            Tuple.Create("Text Corrector", typeof(TextCorrectionPlugin)),
+            Tuple.Create("Automatic Response", typeof(ResponsePlugin)),
+            Tuple.Create("options test", typeof(ConfigOptionsTest)),
+        };
     }
 }

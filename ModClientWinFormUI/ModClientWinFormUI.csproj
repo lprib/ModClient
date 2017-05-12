@@ -69,6 +69,12 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewPluginChooser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewPluginChooser.Designer.cs">
+      <DependentUpon>NewPluginChooser.cs</DependentUpon>
+    </Compile>
     <Compile Include="PluginManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,7 +88,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="DefaultSettings.cs" />
     <Compile Include="MetaClickableStyle.cs" />
     <EmbeddedResource Include="ChatSelectionWindow.resx">
       <DependentUpon>ChatSelectionWindow.cs</DependentUpon>

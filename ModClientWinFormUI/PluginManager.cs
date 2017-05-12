@@ -15,80 +15,115 @@ namespace ModClientWinFormUI
     public partial class PluginManager : Form
     {
         private MessageServiceBase service;
-        private int currentOptionTableRow = 0;
 
         public MessageServiceBase Service
         {
-            get { return service; }
             set
             {
                 service = value;
+                //when service is initially loaded, add the UI for each already running plugin
                 foreach (var plugin in service.Plugins)
-                    addPluginToList(plugin);
+                {
+                    InitialisePluginUI(plugin);
+                }
             }
         }
 
         public PluginManager()
         {
             InitializeComponent();
-            foreach (var defaultPluginTuple in DefaultSettings.DefaultPlugins)
-            {
-                addPluginSelect.Items.Add(defaultPluginTuple.Item1);
-                addPluginSelect.SelectedIndexChanged +=
-                    (sender, args) =>
-                    {
-                        var newPlugin =
-                            (PluginBase)
-                            Activator.CreateInstance(
-                                typeof(ConfigOptionsTest),
-                                service);
-                        service.AddPlugin(newPlugin);
-                        addPluginToList(newPlugin);
-                    };
-            }
+            InitialiseNewPluginComboBox();
         }
 
-        private void addPluginToList(PluginBase plugin)
+        private void InitialiseNewPluginComboBox()
         {
-            var newPluginButton = new Button {Text = plugin.ToString()};
-            pluginListView.Controls.Add(newPluginButton);
-            //when the plugin is clicked in the list, its options should come up
-            newPluginButton.Click += (sender, args) =>
+            //add all the default plugins to the New Plugin DropDown
+            foreach (var tuple in Plugin.DefaultPlugins)
             {
-                resetPluginOptions();
-                foreach (var option in plugin.GetConfigOptions())
-                {
-                    addPluginOption(option);
-                }
+                newPluginComboBox.Items.Add(tuple.Item1);
+            }
+
+            //load up the UI and initialise the plugin when it is selected in the dropdown
+            newPluginComboBox.SelectionChangeCommitted += (sender, args) =>
+            {
+                var selectedPluginTuple = Plugin.DefaultPlugins[newPluginComboBox.SelectedIndex];
+                var plugin = (Plugin) Activator.CreateInstance(selectedPluginTuple.Item2, service);
+                service.AddPlugin(plugin);
+                InitialisePluginUI(plugin);
             };
         }
 
-        private void addPluginOption(ConfigOption option)
+        private void InitialisePluginUI(Plugin plugin)
         {
-            pluginOptions.Controls.Add(new Label {Text = option.ConfigName}, 0, currentOptionTableRow);
+            var activePluginButton = new Button
+            {
+                Text = plugin.ToString()
+            };
+
+            //when the active plugin is clicked in the list, load up its config options in the options panel
+            activePluginButton.Click +=
+                (sender, args) =>
+                {
+                    pluginOptionsPanel.Controls.Clear();
+                    pluginOptionsPanel.Controls.Add(GetOptionsPanel(plugin));
+                };
+
+            activePluginsList.Controls.Add(activePluginButton);
+        }
+
+        private TableLayoutPanel GetOptionsPanel(Plugin plugin)
+        {
+            TableLayoutPanel panel = new TableLayoutPanel
+            {
+                GrowStyle = TableLayoutPanelGrowStyle.AddRows,
+                ColumnCount = 2,
+                Dock = DockStyle.Fill,
+                //Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
+                ColumnStyles =
+                {
+                    new ColumnStyle(SizeType.Percent, 50),
+                    new ColumnStyle(SizeType.Percent, 50)
+                },
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
+            };
+
+            for (int configOptionIndex = 0; configOptionIndex < plugin.GetConfigOptions().Count; configOptionIndex++)
+            {
+                var configOption = plugin.GetConfigOptions()[configOptionIndex];
+                panel.Controls.Add(new Label {Text = configOption.ConfigName}, 0, configOptionIndex);
+                panel.Controls.Add(getControl(configOption), 1, configOptionIndex);
+            }
+            return panel;
+        }
+
+        private Control getControl(ConfigOption option)
+        {
+            Control control = null;
             switch (option.ConfigType)
             {
                 case ConfigOption.Type.Boolean:
-                    pluginOptions.Controls.Add(new CheckBox(), 1, currentOptionTableRow);
+                    control = new CheckBox {Checked = (bool) option.Data};
+                    control.Click += (s, a) => option.Data = ((CheckBox) control).Checked;
                     break;
                 case ConfigOption.Type.Text:
-                    pluginOptions.Controls.Add(new TextBox(), 1, currentOptionTableRow);
+                    control = new TextBox {Text = (string) option.Data, Dock = DockStyle.Fill};
+
+                    //update the underlying control when enter is pressed
+                    control.KeyPress += (s, keyArgs) =>
+                    {
+                        if (keyArgs.KeyChar == (char) Keys.Enter)
+                        {
+                            option.Data = ((TextBox) control).Text;
+                        }
+                    };
                     break;
                 case ConfigOption.Type.Button:
-                    pluginOptions.Controls.Add(new Button(), 1, currentOptionTableRow);
+                    control = new Button {Text = option.ConfigName, Dock = DockStyle.Fill};
+                    //increment data on click as per spec
+                    control.Click += (s, a) => option.Data = (int) option.Data + 1;
                     break;
             }
-            currentOptionTableRow++;
-        }
-
-        private void resetPluginOptions()
-        {
-            pluginOptions.Controls.Clear();
-            currentOptionTableRow = 0;
-        }
-
-        private void saveOptionsButton_Click(object sender, EventArgs e)
-        {
+            return control;
         }
     }
 }

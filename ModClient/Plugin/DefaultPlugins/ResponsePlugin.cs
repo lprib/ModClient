@@ -4,9 +4,13 @@ using ModClient.MessageService;
 
 namespace ModClient.Plugin
 {
-    public class ResponsePlugin : PluginBase
+    public class ResponsePlugin : Plugin
     {
-        private static readonly string Trigger = "/response ";
+        private List<ConfigOption> options = new List<ConfigOption>()
+        {
+            new ConfigOption("Trigger", ConfigOption.Type.Text) {Data = "/response"}
+        };
+
         private static readonly Regex AddResponseRegex = new Regex(@"^add ""([^""]+)"" ""([^""]+)""");
         private readonly Dictionary<string, string> responses = new Dictionary<string, string>();
 
@@ -16,10 +20,11 @@ namespace ModClient.Plugin
 
         public override string PreprocessOutgoingMessage(string message)
         {
-            if (!message.StartsWith(Trigger))
+            var trigger = (string)options[0].Data;
+            if (!message.StartsWith(trigger))
                 return message;
 
-            var newMessage = message.Substring(Trigger.Length);
+            var newMessage = message.Substring(trigger.Length);
             if (newMessage.StartsWith("add"))
             {
                 var match = AddResponseRegex.Match(newMessage);
@@ -51,6 +56,6 @@ namespace ModClient.Plugin
                     ParentService.SendMessage(response.Value);
         }
 
-        public override string ToString() => "Automated Response";
+        public override List<ConfigOption> GetConfigOptions() => options;
     }
 }

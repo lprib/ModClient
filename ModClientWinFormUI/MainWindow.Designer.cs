@@ -35,7 +35,7 @@
             this.devChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enableAndDisableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pluginManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startTab = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -60,7 +60,7 @@
             this.pluginsToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(363, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(350, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -100,25 +100,25 @@
             // pluginsToolStripMenuItem
             // 
             this.pluginsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enableAndDisableToolStripMenuItem,
+            this.pluginManagerToolStripMenuItem,
             this.importToolStripMenuItem});
             this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
             this.pluginsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.pluginsToolStripMenuItem.Text = "&Plugins";
             // 
-            // enableAndDisableToolStripMenuItem
+            // pluginManagerToolStripMenuItem
             // 
-            this.enableAndDisableToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_edit;
-            this.enableAndDisableToolStripMenuItem.Name = "enableAndDisableToolStripMenuItem";
-            this.enableAndDisableToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.enableAndDisableToolStripMenuItem.Text = "&Enable and Disable...";
-            this.enableAndDisableToolStripMenuItem.Click += new System.EventHandler(this.enableAndDisableToolStripMenuItem_Click);
+            this.pluginManagerToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_edit;
+            this.pluginManagerToolStripMenuItem.Name = "pluginManagerToolStripMenuItem";
+            this.pluginManagerToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.pluginManagerToolStripMenuItem.Text = "&Plugin Manager";
+            this.pluginManagerToolStripMenuItem.Click += new System.EventHandler(this.pluginManagerToolStripMenuItem_Click);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_go;
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.importToolStripMenuItem.Text = "&Import...";
             // 
             // startTab
@@ -130,7 +130,7 @@
             this.startTab.Location = new System.Drawing.Point(4, 22);
             this.startTab.Margin = new System.Windows.Forms.Padding(0);
             this.startTab.Name = "startTab";
-            this.startTab.Size = new System.Drawing.Size(355, 202);
+            this.startTab.Size = new System.Drawing.Size(342, 214);
             this.startTab.TabIndex = 0;
             this.startTab.Text = "Start";
             this.startTab.UseVisualStyleBackColor = true;
@@ -139,10 +139,10 @@
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.Location = new System.Drawing.Point(3, 156);
+            this.linkLabel1.Location = new System.Drawing.Point(3, 168);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.linkLabel1.Size = new System.Drawing.Size(349, 17);
+            this.linkLabel1.Size = new System.Drawing.Size(336, 17);
             this.linkLabel1.TabIndex = 3;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Github";
@@ -153,9 +153,9 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Location = new System.Drawing.Point(0, 143);
+            this.label1.Location = new System.Drawing.Point(0, 155);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(355, 13);
+            this.label1.Size = new System.Drawing.Size(342, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "ModClient v0.1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -168,7 +168,7 @@
             this.pictureBox1.Image = global::ModClientWinFormUI.Properties.Resources.icon;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(349, 137);
+            this.pictureBox1.Size = new System.Drawing.Size(336, 149);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -178,9 +178,9 @@
             this.defaultStartButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.defaultStartButton.Image = global::ModClientWinFormUI.Properties.Resources.add;
-            this.defaultStartButton.Location = new System.Drawing.Point(3, 176);
+            this.defaultStartButton.Location = new System.Drawing.Point(3, 188);
             this.defaultStartButton.Name = "defaultStartButton";
-            this.defaultStartButton.Size = new System.Drawing.Size(349, 23);
+            this.defaultStartButton.Size = new System.Drawing.Size(336, 23);
             this.defaultStartButton.TabIndex = 0;
             this.defaultStartButton.Text = "New Chat";
             this.defaultStartButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -197,14 +197,14 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(363, 228);
+            this.tabControl1.Size = new System.Drawing.Size(350, 240);
             this.tabControl1.TabIndex = 1;
             // 
             // closeTabButton
             // 
             this.closeTabButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.closeTabButton.Image = global::ModClientWinFormUI.Properties.Resources.cancel;
-            this.closeTabButton.Location = new System.Drawing.Point(338, 0);
+            this.closeTabButton.Location = new System.Drawing.Point(325, 0);
             this.closeTabButton.Name = "closeTabButton";
             this.closeTabButton.Size = new System.Drawing.Size(25, 25);
             this.closeTabButton.TabIndex = 2;
@@ -232,7 +232,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 255);
+            this.ClientSize = new System.Drawing.Size(350, 267);
             this.Controls.Add(this.closeTabButton);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.mainMenuStrip);
@@ -267,7 +267,7 @@
         private System.Windows.Forms.Button closeTabButton;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem enableAndDisableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pluginManagerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolTip closeTabToolTip;

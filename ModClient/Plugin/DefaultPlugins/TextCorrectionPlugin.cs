@@ -3,7 +3,7 @@ using ModClient.MessageService;
 
 namespace ModClient.Plugin
 {
-    public class TextCorrectionPlugin : PluginBase
+    public class TextCorrectionPlugin : Plugin
     {
         private static readonly Regex Regex = new Regex(@"^s/([^/]+)/([^/]+)");
         private string previousMessage = "";

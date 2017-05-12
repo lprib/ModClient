@@ -3,7 +3,7 @@ using ModClient.MessageService;
 
 namespace ModClient.Plugin
 {
-    public class BibbaPlugin : PluginBase
+    public class BibbaPlugin : Plugin
     {
         public BibbaPlugin(MessageServiceBase service) : base(service)
         {
