@@ -39,6 +39,10 @@ namespace ModClientWinFormUI
 
         private MessageServiceBase service;
 
+        //TODO
+        private List<string> lastSent = new List<string>();
+        private int lastSentIndex;
+
         public ChatView()
         {
             InitializeComponent();
@@ -132,6 +136,9 @@ namespace ModClientWinFormUI
                 Service.SendMessage(messageInputBox.Text);
                 messageInputBox.Clear();
                 e.SuppressKeyPress = true;
+            } else if (e.KeyCode == Keys.Up)
+            {
+                
             }
         }
 

@@ -10,7 +10,7 @@ namespace ModClient.Plugin
 
         private List<ConfigOption> options = new List<ConfigOption>()
         {
-            new ConfigOption("Trigger", ConfigOption.Type.Text) {Data = "/response"}
+            new ConfigOption("Trigger", ConfigOption.Type.Text) {Data = "/response "}
         };
 
         private static readonly Regex AddResponseRegex = new Regex(@"^add ""([^""]+)"" ""([^""]+)""");
@@ -57,5 +57,7 @@ namespace ModClient.Plugin
                 if (message.PlainText.ToLower() == response.Key)
                     ParentService.SendMessage(response.Value);
         }
+
+        public override string ToString() => "Automated Response";
     }
 }

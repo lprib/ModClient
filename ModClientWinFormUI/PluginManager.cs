@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModClient.MessageService;
 using ModClient.Plugin;
+using ModClientWinFormUI.Properties;
 
 namespace ModClientWinFormUI
 {
@@ -37,6 +38,8 @@ namespace ModClientWinFormUI
         {
             InitializeComponent();
             InitialiseNewPluginComboBox();
+
+            Icon = Icon.FromHandle(Resources.script_lightning.GetHicon());
         }
 
         private void InitialiseNewPluginComboBox()

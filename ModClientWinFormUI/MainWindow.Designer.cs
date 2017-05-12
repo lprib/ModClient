@@ -110,16 +110,16 @@
             // 
             this.pluginManagerToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_edit;
             this.pluginManagerToolStripMenuItem.Name = "pluginManagerToolStripMenuItem";
-            this.pluginManagerToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.pluginManagerToolStripMenuItem.Text = "&Plugin Manager";
+            this.pluginManagerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pluginManagerToolStripMenuItem.Text = "&Manager...";
             this.pluginManagerToolStripMenuItem.Click += new System.EventHandler(this.pluginManagerToolStripMenuItem_Click);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Image = global::ModClientWinFormUI.Properties.Resources.script_go;
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.importToolStripMenuItem.Text = "&Import...";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importToolStripMenuItem.Text = "&Import (WIP)...";
             // 
             // startTab
             // 

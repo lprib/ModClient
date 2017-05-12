@@ -123,6 +123,16 @@ namespace ModClientWinFormUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap script_delete {
+            get {
+                object obj = ResourceManager.GetObject("script_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap script_edit {
             get {
                 object obj = ResourceManager.GetObject("script_edit", resourceCulture);
@@ -136,6 +146,16 @@ namespace ModClientWinFormUI.Properties {
         internal static System.Drawing.Bitmap script_go {
             get {
                 object obj = ResourceManager.GetObject("script_go", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap script_lightning {
+            get {
+                object obj = ResourceManager.GetObject("script_lightning", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -21,8 +21,12 @@ namespace ModClient.Plugin
                 new ConfigOption("Text option", ConfigOption.Type.Text,
                     (val, newVal) => PluginOutput($"Text changed: {val} to {newVal}")),
                 new ConfigOption("Button option", ConfigOption.Type.Button,
-                    (val, newVal) => PluginOutput("Button pressed")),
+                    (val, newVal) => PluginOutput("Button 1 pressed")),
+                new ConfigOption("Another utton option", ConfigOption.Type.Button,
+                    (val, newVal) => PluginOutput("Button 2 pressed")),
             };
+
+            service.OnMessageRecieved += message => { Console.WriteLine(message.PlainText); };
         }
 
         public override string ToString() => "Options Test";
