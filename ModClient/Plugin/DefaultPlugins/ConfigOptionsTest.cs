@@ -6,7 +6,7 @@ namespace ModClient.Plugins
 {
     public class ConfigOptionsTest : Plugin
     {
-        public ConfigOptionsTest(MessageServiceBase service) : base(service)
+        public ConfigOptionsTest(ServiceView service) : base(service)
         {
             ConfigOptions = new List<ConfigOption>
             {

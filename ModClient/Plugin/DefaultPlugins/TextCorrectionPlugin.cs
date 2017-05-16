@@ -8,7 +8,7 @@ namespace ModClient.Plugins
         private static readonly Regex Regex = new Regex(@"^s/([^/]+)/([^/]+)");
         private string previousMessage = "";
 
-        public TextCorrectionPlugin(MessageServiceBase service) : base(service)
+        public TextCorrectionPlugin(ServiceView service) : base(service)
         {
         }
 

@@ -5,7 +5,7 @@ namespace ModClient.Plugins
 {
     public class BibbaPlugin : Plugin
     {
-        public BibbaPlugin(MessageServiceBase service) : base(service)
+        public BibbaPlugin(ServiceView service) : base(service)
         {
         }
 

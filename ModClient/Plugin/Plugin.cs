@@ -20,9 +20,9 @@ namespace ModClient.Plugins
         };
 
         private bool enabled;
-        protected MessageServiceBase ParentService;
+        protected ServiceView ParentService;
 
-        protected Plugin(MessageServiceBase service)
+        protected Plugin(ServiceView service)
         {
             ParentService = service;
             Enabled = true;

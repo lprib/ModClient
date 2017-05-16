@@ -14,7 +14,7 @@ namespace ModClient.Plugins
             new ConfigOption("Trigger", ConfigOption.Type.Text) {Data = "/response "}
         };
 
-        public ResponsePlugin(MessageServiceBase service) : base(service)
+        public ResponsePlugin(ServiceView service) : base(service)
         {
         }
 
