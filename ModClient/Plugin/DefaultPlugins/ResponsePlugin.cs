@@ -2,23 +2,23 @@
 using System.Text.RegularExpressions;
 using ModClient.MessageService;
 
-namespace ModClient.Plugin
+namespace ModClient.Plugins
 {
     public class ResponsePlugin : Plugin
     {
-        public override List<ConfigOption> ConfigOptions => options;
+        private static readonly Regex AddResponseRegex = new Regex(@"^add ""([^""]+)"" ""([^""]+)""");
+        private readonly Dictionary<string, string> responses = new Dictionary<string, string>();
 
-        private List<ConfigOption> options = new List<ConfigOption>()
+        private readonly List<ConfigOption> options = new List<ConfigOption>
         {
             new ConfigOption("Trigger", ConfigOption.Type.Text) {Data = "/response "}
         };
 
-        private static readonly Regex AddResponseRegex = new Regex(@"^add ""([^""]+)"" ""([^""]+)""");
-        private readonly Dictionary<string, string> responses = new Dictionary<string, string>();
-
         public ResponsePlugin(MessageServiceBase service) : base(service)
         {
         }
+
+        public override List<ConfigOption> ConfigOptions => options;
 
         public override string PreprocessOutgoingMessage(string message)
         {

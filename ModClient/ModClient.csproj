@@ -63,6 +63,7 @@
     <Compile Include="MessageService\Chatto\ChattoProto.cs" />
     <Compile Include="MessageService\InfoType.cs" />
     <Compile Include="MessageService\Irc\IrcMessageService.cs" />
+    <Compile Include="MessageService\ServiceView.cs" />
     <Compile Include="MessageService\ToastyChat\ToastyChatMessageService.cs" />
     <Compile Include="Plugin\DefaultPlugins\BibbaPlugin.cs" />
     <Compile Include="Plugin\DefaultPlugins\ConfigOptionsTest.cs" />

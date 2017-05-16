@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using ModClient.MessageService;
 using ModClient.MessageService.HackChat;
-using ModClient.Plugin;
+using ModClient.Plugins;
 using ModClientWinFormUI.Properties;
 
 namespace ModClientWinFormUI
@@ -19,7 +19,7 @@ namespace ModClientWinFormUI
             Icon = Icon.FromHandle(Resources.icon.GetHicon());
         }
 
-        private void AddTab(MessageServiceBase service)
+        private void AddTab(ServiceView service)
         {
             var newTab = new TabPage
             {
@@ -35,7 +35,7 @@ namespace ModClientWinFormUI
             var selectionWin = new ChatSelectionWindow();
             selectionWin.ShowDialog();
             if (selectionWin.DialogResult == DialogResult.OK)
-                AddTab(selectionWin.MessageService);
+                AddTab(selectionWin.MessageService.GetView());
         }
 
         private void closeTabButton_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace ModClientWinFormUI
 
         private void devChatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTab(new HackChatMessageService("ModClient_test", "test", "botDev"));
+            AddTab(new HackChatMessageService("ModClient_test", "test", "botDev").GetView());
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

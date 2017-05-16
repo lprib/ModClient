@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ModClient.MessageService;
 
-namespace ModClient.Plugin
+namespace ModClient.Plugins
 {
     public delegate void PluginOutputDelegate(string message);
 
@@ -11,17 +11,25 @@ namespace ModClient.Plugin
     //also has the ability to preprocess text before it is sent to the backend/server
     public abstract class Plugin
     {
+        public static List<Tuple<string, Type>> DefaultPlugins = new List<Tuple<string, Type>>
+        {
+            Tuple.Create("Bibba", typeof(BibbaPlugin)),
+            Tuple.Create("Text Corrector", typeof(TextCorrectionPlugin)),
+            Tuple.Create("Automatic Response", typeof(ResponsePlugin)),
+            Tuple.Create("options test", typeof(ConfigOptionsTest))
+        };
+
         private bool enabled;
         protected MessageServiceBase ParentService;
-
-        //override this to provide your own config options
-        public virtual List<ConfigOption> ConfigOptions { get; } = new List<ConfigOption>();
 
         protected Plugin(MessageServiceBase service)
         {
             ParentService = service;
             Enabled = true;
         }
+
+        //override this to provide your own config options
+        public virtual List<ConfigOption> ConfigOptions { get; } = new List<ConfigOption>();
 
         public bool Enabled
         {
@@ -52,13 +60,5 @@ namespace ModClient.Plugin
         }
 
         protected void PluginOutput(string message) => OnPluginOutput?.Invoke(message);
-
-        public static List<Tuple<string, Type>> DefaultPlugins = new List<Tuple<string, Type>>
-        {
-            Tuple.Create("Bibba", typeof(BibbaPlugin)),
-            Tuple.Create("Text Corrector", typeof(TextCorrectionPlugin)),
-            Tuple.Create("Automatic Response", typeof(ResponsePlugin)),
-            Tuple.Create("options test", typeof(ConfigOptionsTest)),
-        };
     }
 }

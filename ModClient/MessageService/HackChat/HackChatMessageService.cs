@@ -118,7 +118,7 @@ namespace ModClient.MessageService.HackChat
             }
         }
 
-        public override void SendMessage(string message)
+        protected override void SendMessage(string message)
         {
             message = PluginProcess(message);
             if (message == null) return;
@@ -128,7 +128,7 @@ namespace ModClient.MessageService.HackChat
             webSocket.Send(serialized);
         }
 
-        public override void Close()
+        protected override void Close()
         {
             webSocket.Close();
             //NOTE pingthread gets interruped within webSocket.OnClose

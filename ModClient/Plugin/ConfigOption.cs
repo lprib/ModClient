@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ModClient.Plugin
+﻿namespace ModClient.Plugins
 {
     public delegate void OnConfigOptionChangedDelegate(object oldVal, object newVal);
 
@@ -16,22 +9,14 @@ namespace ModClient.Plugin
 
     public class ConfigOption
     {
-        public string Name { get; }
-        public Type DataType { get; }
-
-        private object data;
-
-        public object Data
+        public enum Type
         {
-            get { return data; }
-            set
-            {
-                OnChanged?.Invoke(data, value);
-                data = value;
-            }
+            Boolean,
+            Button,
+            Text
         }
 
-        public event OnConfigOptionChangedDelegate OnChanged;
+        private object data;
 
         public ConfigOption(string name, Type dataType, OnConfigOptionChangedDelegate onChangedAction = null)
         {
@@ -52,16 +37,22 @@ namespace ModClient.Plugin
             }
 
             if (onChangedAction != null)
-            {
                 OnChanged += onChangedAction;
+        }
+
+        public string Name { get; }
+        public Type DataType { get; }
+
+        public object Data
+        {
+            get { return data; }
+            set
+            {
+                OnChanged?.Invoke(data, value);
+                data = value;
             }
         }
 
-        public enum Type
-        {
-            Boolean,
-            Button,
-            Text,
-        }
+        public event OnConfigOptionChangedDelegate OnChanged;
     }
 }

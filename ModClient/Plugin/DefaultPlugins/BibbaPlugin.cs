@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using ModClient.MessageService;
 
-namespace ModClient.Plugin
+namespace ModClient.Plugins
 {
     public class BibbaPlugin : Plugin
     {

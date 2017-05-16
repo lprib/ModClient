@@ -37,7 +37,7 @@ namespace ModClientWinFormUI
         private static readonly Style UrlStyle =
             new MetaClickableStyle(new SolidBrush(Color.FromArgb(236, 64, 122)), null, FontStyle.Regular);
 
-        private MessageServiceBase service;
+        private ServiceView service;
 
         //TODO
         private List<string> lastSent = new List<string>();
@@ -60,7 +60,7 @@ namespace ModClientWinFormUI
         }
 
         [Browsable(false)]
-        public MessageServiceBase Service
+        public ServiceView Service
         {
             get { return service; }
             set

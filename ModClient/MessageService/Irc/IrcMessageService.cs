@@ -25,12 +25,12 @@ namespace ModClient.MessageService.Irc
 
         public override string ServiceName { get; } = "IRC";
 
-        public override void SendMessage(string message)
+        protected override void SendMessage(string message)
         {
             client.SendMessage(message);
         }
 
-        public override void Close()
+        protected override void Close()
         {
             client.Quit();
         }

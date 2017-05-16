@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Google.Protobuf;
-using Google.Protobuf.WellKnownTypes;
 using Proto;
 using WebSocketSharp;
 
@@ -9,9 +8,7 @@ namespace ModClient.MessageService.Chatto
 {
     public class ChattoMessageService : MessageServiceBase
     {
-        public override string ServiceName { get; } = "Chatto";
-
-        private WebSocket ws;
+        private readonly WebSocket ws;
 
         public ChattoMessageService(string url, string name, string pass, string room)
         {
@@ -40,12 +37,14 @@ namespace ModClient.MessageService.Chatto
             ws.Connect();
         }
 
-        public override void SendMessage(string message)
+        public override string ServiceName { get; } = "Chatto";
+
+        protected override void SendMessage(string message)
         {
             ws.Send(new ChatToServer {Text = message}.ToByteArray());
         }
 
-        public override void Close()
+        protected override void Close()
         {
             ws.Close();
         }

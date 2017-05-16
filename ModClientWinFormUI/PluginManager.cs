@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ModClient.MessageService;
-using ModClient.Plugin;
+using ModClient.Plugins;
 using ModClientWinFormUI.Properties;
 
 namespace ModClientWinFormUI
 {
     public partial class PluginManager : Form
     {
-        private MessageServiceBase service;
+        private ServiceView service;
 
-        public MessageServiceBase Service
+        public ServiceView Service
         {
             set
             {
@@ -141,7 +141,7 @@ namespace ModClientWinFormUI
         {
             var pluginToRemove = activePluginButtons[currentSelectedPluginButton];
             activePluginsList.Controls.Remove(currentSelectedPluginButton);
-            service.Plugins.Remove(pluginToRemove);
+            service.RemovePlugin(pluginToRemove);
             pluginOptionsPanel.Controls.Clear();
         }
     }
