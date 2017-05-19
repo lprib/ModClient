@@ -1,11 +1,11 @@
 ﻿using System.Text.RegularExpressions;
-using ModClient.MessageService;
+using ModClient.MessageServices;
 
 namespace ModClient.Plugins
 {
     public class BibbaPlugin : Plugin
     {
-        public BibbaPlugin(ServiceView service) : base(service)
+        public BibbaPlugin(IServiceView service) : base(service)
         {
         }
 

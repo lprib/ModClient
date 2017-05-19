@@ -1,4 +1,4 @@
-﻿namespace ModClient.MessageService
+﻿namespace ModClient.MessageServices
 {
     //Rich text is represented by a list of nodes, each with a type
     //these nodes can be interpreted by the frontend for formatting

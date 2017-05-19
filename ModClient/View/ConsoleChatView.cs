@@ -1,6 +1,6 @@
 ﻿using System;
-using ModClient.MessageService;
-using ModClient.MessageService.HackChat;
+using ModClient.MessageServices;
+using ModClient.MessageServices.HackChat;
 using static System.ConsoleColor;
 
 namespace ModClient.View
@@ -8,7 +8,7 @@ namespace ModClient.View
     public class ConsoleChatView
     {
         private readonly ConsoleColor[] usernameColors = {Blue, Cyan, Red, Magenta};
-        private ServiceView service;
+        private IServiceView service;
 
         public void Run()
         {
@@ -22,7 +22,7 @@ namespace ModClient.View
 
             service = new HackChatMessageService(username, pass, chan).GetView();
             //service.OnJoinLeave += (isJoin, user) => Console.WriteLine(user + (isJoin ? " joined." : " left."));
-            service.OnMessageRecieved += OnMessageRevieved;
+            service.OnMessage += OnMessageRevieved;
 
             while (true)
             {

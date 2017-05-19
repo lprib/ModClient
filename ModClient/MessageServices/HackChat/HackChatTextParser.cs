@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace ModClient.MessageService.HackChat
+namespace ModClient.MessageServices.HackChat
 {
     //statically Parses an incoming message string into a list of RichTextNodes.
     internal static class HackChatTextParser
     {
         private static readonly Regex Latex = new Regex(@"\$[^\$]*\$");
 
-        public static List<RichTextNode> GetRichText(string text, ServiceView service)
+        public static List<RichTextNode> GetRichText(string text, IServiceView service)
         {
             //start with a single plaintext node conatining the entire text
             var richText = new List<RichTextNode> {new RichTextNode(text, RichTextNode.NodeType.Text)};

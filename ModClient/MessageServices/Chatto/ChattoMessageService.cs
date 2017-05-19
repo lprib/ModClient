@@ -4,9 +4,9 @@ using Google.Protobuf;
 using Proto;
 using WebSocketSharp;
 
-namespace ModClient.MessageService.Chatto
+namespace ModClient.MessageServices.Chatto
 {
-    public class ChattoMessageService : MessageServiceBase
+    public class ChattoMessageService : MessageService
     {
         private readonly WebSocket ws;
 

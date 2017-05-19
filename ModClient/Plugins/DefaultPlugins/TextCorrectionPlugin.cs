@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using ModClient.MessageService;
+using ModClient.MessageServices;
 
 namespace ModClient.Plugins
 {
@@ -8,7 +8,7 @@ namespace ModClient.Plugins
         private static readonly Regex Regex = new Regex(@"^s/([^/]+)/([^/]+)");
         private string previousMessage = "";
 
-        public TextCorrectionPlugin(ServiceView service) : base(service)
+        public TextCorrectionPlugin(IServiceView service) : base(service)
         {
         }
 

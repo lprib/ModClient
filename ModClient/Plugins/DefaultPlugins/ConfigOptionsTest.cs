@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using ModClient.MessageService;
+using ModClient.MessageServices;
 
 namespace ModClient.Plugins
 {
     public class ConfigOptionsTest : Plugin
     {
-        public ConfigOptionsTest(ServiceView service) : base(service)
+        public ConfigOptionsTest(IServiceView service) : base(service)
         {
             ConfigOptions = new List<ConfigOption>
             {
@@ -20,7 +20,7 @@ namespace ModClient.Plugins
                     (val, newVal) => PluginOutput("Button 2 pressed"))
             };
 
-            service.OnMessageRecieved += message => { Console.WriteLine(message.PlainText); };
+            service.OnMessage += message => { Console.WriteLine(message.PlainText); };
         }
 
         public override List<ConfigOption> ConfigOptions { get; } = new List<ConfigOption>();

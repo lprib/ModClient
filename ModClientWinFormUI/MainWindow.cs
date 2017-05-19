@@ -3,8 +3,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ModClient.MessageService;
-using ModClient.MessageService.HackChat;
+using ModClient.MessageServices;
+using ModClient.MessageServices.HackChat;
 using ModClient.Plugins;
 using ModClientWinFormUI.Properties;
 
@@ -19,7 +19,7 @@ namespace ModClientWinFormUI
             Icon = Icon.FromHandle(Resources.icon.GetHicon());
         }
 
-        private void AddTab(ServiceView service)
+        private void AddTab(IServiceView service)
         {
             var newTab = new TabPage
             {
@@ -78,7 +78,7 @@ namespace ModClientWinFormUI
         {
             var newItem = new ToolStripMenuItem {Text = name};
             //retrieves the current service on run
-            Func<MessageServiceBase> service =
+            Func<MessageService> service =
                 () => tabControl1.SelectedTab.Controls.OfType<ChatView>().First().Service;
 
             newItem.Click += (o, a) =>

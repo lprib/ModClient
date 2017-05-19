@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using ModClient.MessageService;
-using ModClient.MessageService.Chatto;
-using ModClient.MessageService.HackChat;
-using ModClient.MessageService.Irc;
-using ModClient.MessageService.ToastyChat;
+using ModClient.MessageServices;
+using ModClient.MessageServices.Chatto;
+using ModClient.MessageServices.HackChat;
+using ModClient.MessageServices.Irc;
+using ModClient.MessageServices.ToastyChat;
 
 namespace ModClientWinFormUI
 {
@@ -19,7 +19,7 @@ namespace ModClientWinFormUI
 //            passwordTextBox.DataBindings.Add("Text", this, "Password");
         }
 
-        public MessageServiceBase MessageService { get; private set; }
+        public MessageService MessageService { get; private set; }
 
         private void okButton_Click(object sender, EventArgs e)
         {

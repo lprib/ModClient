@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using ChatSharp;
 
-namespace ModClient.MessageService.Irc
+namespace ModClient.MessageServices.Irc
 {
-    public class IrcMessageService : MessageServiceBase
+    public class IrcMessageService : MessageService
     {
         private readonly IrcClient client;
 

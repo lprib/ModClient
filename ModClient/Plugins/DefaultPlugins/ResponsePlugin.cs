@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using ModClient.MessageService;
+using ModClient.MessageServices;
 
 namespace ModClient.Plugins
 {
@@ -14,7 +14,7 @@ namespace ModClient.Plugins
             new ConfigOption("Trigger", ConfigOption.Type.Text) {Data = "/response "}
         };
 
-        public ResponsePlugin(ServiceView service) : base(service)
+        public ResponsePlugin(IServiceView service) : base(service)
         {
         }
 
@@ -47,9 +47,9 @@ namespace ModClient.Plugins
             return null;
         }
 
-        protected override void OnEnabled() => ParentService.OnMessageRecieved += OnMessage;
+        protected override void OnEnabled() => ParentService.OnMessage += OnMessage;
 
-        protected override void OnDisabled() => ParentService.OnMessageRecieved -= OnMessage;
+        protected override void OnDisabled() => ParentService.OnMessage -= OnMessage;
 
         private void OnMessage(Message message)
         {

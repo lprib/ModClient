@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
-using ModClient.MessageService;
-using Message = ModClient.MessageService.Message;
+using ModClient.MessageServices;
+using Message = ModClient.MessageServices.Message;
 
 namespace ModClientWinFormUI
 {
@@ -37,7 +37,7 @@ namespace ModClientWinFormUI
         private static readonly Style UrlStyle =
             new MetaClickableStyle(new SolidBrush(Color.FromArgb(236, 64, 122)), null, FontStyle.Regular);
 
-        private ServiceView service;
+        private IServiceView service;
 
         //TODO
         private List<string> lastSent = new List<string>();
@@ -60,7 +60,7 @@ namespace ModClientWinFormUI
         }
 
         [Browsable(false)]
-        public ServiceView Service
+        public IServiceView Service
         {
             get { return service; }
             set
@@ -68,8 +68,8 @@ namespace ModClientWinFormUI
                 service = value;
                 if (value == null)
                     throw new NullReferenceException();
-                Service.OnMessageRecieved += AddMessage;
-                Service.OnInfoRecieved += AddInfo;
+                Service.OnMessage += AddMessage;
+                Service.OnInfo += AddInfo;
                 Service.OnPluginOutput += output => AppendStyle("\n" + output, PluginOutputStyle);
             }
         }

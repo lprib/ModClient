@@ -1,6 +1,6 @@
-﻿namespace ModClient.MessageService
+﻿namespace ModClient.MessageServices
 {
-    //the type of info that was recieved from a MessageServiceBase
+    //the type of info that was recieved from a MessageService
     public enum InfoType
     {
         #region Hack.chat events

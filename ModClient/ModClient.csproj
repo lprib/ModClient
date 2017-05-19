@@ -59,24 +59,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageService\Chatto\ChattoMessageService.cs" />
-    <Compile Include="MessageService\Chatto\ChattoProto.cs" />
-    <Compile Include="MessageService\InfoType.cs" />
-    <Compile Include="MessageService\Irc\IrcMessageService.cs" />
-    <Compile Include="MessageService\ServiceView.cs" />
-    <Compile Include="MessageService\ToastyChat\ToastyChatMessageService.cs" />
-    <Compile Include="Plugin\DefaultPlugins\BibbaPlugin.cs" />
-    <Compile Include="Plugin\DefaultPlugins\ConfigOptionsTest.cs" />
-    <Compile Include="Plugin\Plugin.cs" />
-    <Compile Include="Plugin\ConfigOption.cs" />
-    <Compile Include="Plugin\DefaultPlugins\ResponsePlugin.cs" />
-    <Compile Include="Plugin\DefaultPlugins\TextCorrectionPlugin.cs" />
+    <Compile Include="MessageServices\Chatto\ChattoMessageService.cs" />
+    <Compile Include="MessageServices\Chatto\ChattoProto.cs" />
+    <Compile Include="MessageServices\InfoType.cs" />
+    <Compile Include="MessageServices\Irc\IrcMessageService.cs" />
+    <Compile Include="MessageServices\PluginImproved.cs" />
+    <Compile Include="MessageServices\ServiceView.cs" />
+    <Compile Include="MessageServices\ToastyChat\ToastyChatMessageService.cs" />
+    <Compile Include="Plugins\DefaultPlugins\BibbaPlugin.cs" />
+    <Compile Include="Plugins\DefaultPlugins\ConfigOptionsTest.cs" />
+    <Compile Include="Plugins\Plugin.cs" />
+    <Compile Include="Plugins\ConfigOption.cs" />
+    <Compile Include="Plugins\DefaultPlugins\ResponsePlugin.cs" />
+    <Compile Include="Plugins\DefaultPlugins\TextCorrectionPlugin.cs" />
     <Compile Include="View\ConsoleChatView.cs" />
-    <Compile Include="MessageService\HackChat\HackChatMessageService.cs" />
-    <Compile Include="MessageService\HackChat\HackChatTextParser.cs" />
-    <Compile Include="MessageService\MessageServiceBase.cs" />
-    <Compile Include="MessageService\Message.cs" />
-    <Compile Include="MessageService\RichTextNode.cs" />
+    <Compile Include="MessageServices\HackChat\HackChatMessageService.cs" />
+    <Compile Include="MessageServices\HackChat\HackChatTextParser.cs" />
+    <Compile Include="MessageServices\MessageService.cs" />
+    <Compile Include="MessageServices\Message.cs" />
+    <Compile Include="MessageServices\RichTextNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -84,7 +85,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="MessageService\Chatto\chatto_proto.proto" />
+    <None Include="MessageServices\Chatto\chatto_proto.proto" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

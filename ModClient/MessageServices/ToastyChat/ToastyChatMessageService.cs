@@ -1,6 +1,6 @@
-﻿using ModClient.MessageService.HackChat;
+﻿using ModClient.MessageServices.HackChat;
 
-namespace ModClient.MessageService.ToastyChat
+namespace ModClient.MessageServices.ToastyChat
 {
     public class ToastyChatMessageService : HackChatMessageService
     {

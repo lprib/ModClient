@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ModClient.MessageService;
+using ModClient.MessageServices;
 using ModClient.Plugins;
 using ModClientWinFormUI.Properties;
 
@@ -15,9 +15,9 @@ namespace ModClientWinFormUI
 {
     public partial class PluginManager : Form
     {
-        private ServiceView service;
+        private IServiceView service;
 
-        public ServiceView Service
+        public IServiceView Service
         {
             set
             {

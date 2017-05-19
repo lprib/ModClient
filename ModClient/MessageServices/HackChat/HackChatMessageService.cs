@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocketSharp;
 
-namespace ModClient.MessageService.HackChat
+namespace ModClient.MessageServices.HackChat
 {
-    public class HackChatMessageService : MessageServiceBase
+    public class HackChatMessageService : MessageService
     {
         private readonly WebSocket webSocket;
 
@@ -121,7 +121,7 @@ namespace ModClient.MessageService.HackChat
 
         protected override void SendMessage(string message)
         {
-            message = PluginProcess(message);
+            message = DoMessagePreprocess(message);
             if (message == null) return;
 
             var serialized =

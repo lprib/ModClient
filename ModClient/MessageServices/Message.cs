@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ModClient.MessageService
+namespace ModClient.MessageServices
 {
     public class Message
     {
