@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using FastColoredTextBoxNS;
 using ModClient.MessageServices;
+using ModClient.Plugins;
 using Message = ModClient.MessageServices.Message;
 
 namespace ModClientWinFormUI
@@ -37,7 +38,7 @@ namespace ModClientWinFormUI
         private static readonly Style UrlStyle =
             new MetaClickableStyle(new SolidBrush(Color.FromArgb(236, 64, 122)), null, FontStyle.Regular);
 
-        private IServiceView service;
+        public MessageService.Plugin ViewPlugin { get; private set; }
 
         //TODO
         private List<string> lastSent = new List<string>();
@@ -59,18 +60,11 @@ namespace ModClientWinFormUI
                 (sender, args) => { Process.Start(((MetaClickableStyle) UrlStyle).GetText(args.Marker)); };
         }
 
-        [Browsable(false)]
-        public IServiceView Service
+        public MessageService Service
         {
-            get { return service; }
             set
             {
-                service = value;
-                if (value == null)
-                    throw new NullReferenceException();
-                Service.OnMessage += AddMessage;
-                Service.OnInfo += AddInfo;
-                Service.OnPluginOutput += output => AppendStyle("\n" + output, PluginOutputStyle);
+                ViewPlugin = new ChatViewPlugin(value, this);
             }
         }
 
@@ -133,12 +127,12 @@ namespace ModClientWinFormUI
         {
             if (e.KeyCode == Keys.Enter && !e.Shift)
             {
-                Service.SendMessage(messageInputBox.Text);
+                ViewPlugin.SendMessage(messageInputBox.Text);
                 messageInputBox.Clear();
                 e.SuppressKeyPress = true;
-            } else if (e.KeyCode == Keys.Up)
+            }
+            else if (e.KeyCode == Keys.Up)
             {
-                
             }
         }
 
@@ -158,7 +152,26 @@ namespace ModClientWinFormUI
         //used when the tab is closed
         public void Close()
         {
-            Service.Close();
+            ViewPlugin.Close();
+        }
+
+        private class ChatViewPlugin : MessageService.Plugin
+        {
+            private readonly ChatView parentChatView;
+
+            public ChatViewPlugin(MessageService service, ChatView parentChatView) : base(service)
+            {
+                this.parentChatView = parentChatView;
+            }
+
+            public override void OnMessage(Message message) => parentChatView.AddMessage(message);
+
+            public override void OnInfo(InfoType type, object data) => parentChatView.AddInfo(type, data);
+
+            public override void OnLocalOutput(string output)
+                => parentChatView.AppendStyle("\n" + output, PluginOutputStyle);
+
+            public override string PluginName { get; } = "UI";
         }
     }
 }

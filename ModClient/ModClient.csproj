@@ -59,16 +59,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageServices\MessageServicePlugin.cs" />
     <Compile Include="MessageServices\Chatto\ChattoMessageService.cs" />
     <Compile Include="MessageServices\Chatto\ChattoProto.cs" />
     <Compile Include="MessageServices\InfoType.cs" />
     <Compile Include="MessageServices\Irc\IrcMessageService.cs" />
-    <Compile Include="MessageServices\PluginImproved.cs" />
     <Compile Include="MessageServices\ServiceView.cs" />
     <Compile Include="MessageServices\ToastyChat\ToastyChatMessageService.cs" />
     <Compile Include="Plugins\DefaultPlugins\BibbaPlugin.cs" />
     <Compile Include="Plugins\DefaultPlugins\ConfigOptionsTest.cs" />
-    <Compile Include="Plugins\Plugin.cs" />
     <Compile Include="Plugins\ConfigOption.cs" />
     <Compile Include="Plugins\DefaultPlugins\ResponsePlugin.cs" />
     <Compile Include="Plugins\DefaultPlugins\TextCorrectionPlugin.cs" />

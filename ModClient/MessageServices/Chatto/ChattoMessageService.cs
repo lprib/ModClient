@@ -29,7 +29,7 @@ namespace ModClient.MessageServices.Chatto
             ws.OnMessage += (sender, args) =>
             {
                 var chat = ChatFromServer.Parser.ParseFrom(args.RawData);
-                OnMessageRecievedInternal(new Message(chat.Name, chat.Trip, chat.Text,
+                OnMessage(new Message(chat.Name, chat.Trip, chat.Text,
                     new List<RichTextNode> {new RichTextNode(chat.Text, RichTextNode.NodeType.Text)}, false,
                     DateTime.Now));
             };

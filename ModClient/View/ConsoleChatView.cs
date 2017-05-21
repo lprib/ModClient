@@ -8,7 +8,7 @@ namespace ModClient.View
     public class ConsoleChatView
     {
         private readonly ConsoleColor[] usernameColors = {Blue, Cyan, Red, Magenta};
-        private IServiceView service;
+        private MessageService.Plugin viewPlugin;
 
         public void Run()
         {
@@ -20,13 +20,12 @@ namespace ModClient.View
             var pass = Console.ReadLine();
             Console.Clear();
 
-            service = new HackChatMessageService(username, pass, chan).GetView();
-            //service.OnJoinLeave += (isJoin, user) => Console.WriteLine(user + (isJoin ? " joined." : " left."));
-            service.OnMessage += OnMessageRevieved;
+            var service = new HackChatMessageService(username, pass, chan);
+            viewPlugin = new ConsoleChatViewPlugin(service, this);
 
             while (true)
             {
-                service.SendMessage(Console.ReadLine());
+                viewPlugin.SendMessage(Console.ReadLine());
                 Console.CursorTop--;
             }
         }
@@ -59,6 +58,23 @@ namespace ModClient.View
             Console.ForegroundColor = foreground;
             Console.Write(str);
             Console.ForegroundColor = oldColor;
+        }
+
+        private class ConsoleChatViewPlugin : MessageService.Plugin
+        {
+            private ConsoleChatView view;
+
+            public ConsoleChatViewPlugin(MessageService service, ConsoleChatView view) : base(service)
+            {
+                this.view = view;
+            }
+
+            public override void OnMessage(Message message)
+            {
+                view.OnMessageRevieved(message);
+            }
+
+            public override string PluginName { get; } = "Console UI";
         }
     }
 }

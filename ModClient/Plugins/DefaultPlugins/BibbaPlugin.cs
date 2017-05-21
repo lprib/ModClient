@@ -1,11 +1,11 @@
 ﻿using System.Text.RegularExpressions;
 using ModClient.MessageServices;
 
-namespace ModClient.Plugins
+namespace ModClient.Plugins.DefaultPlugins
 {
-    public class BibbaPlugin : Plugin
+    public class BibbaPlugin : MessageService.Plugin
     {
-        public BibbaPlugin(IServiceView service) : base(service)
+        public BibbaPlugin(MessageService view) : base(view)
         {
         }
 
@@ -18,5 +18,6 @@ namespace ModClient.Plugins
         }
 
         public override string ToString() => "Bibba";
+        public override string PluginName { get; } = "Bibba";
     }
 }

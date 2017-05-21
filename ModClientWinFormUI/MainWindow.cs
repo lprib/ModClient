@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using ModClient.MessageServices;
 using ModClient.MessageServices.HackChat;
 using ModClient.Plugins;
+using ModClient.Plugins.DefaultPlugins;
 using ModClientWinFormUI.Properties;
 
 namespace ModClientWinFormUI
@@ -19,7 +20,7 @@ namespace ModClientWinFormUI
             Icon = Icon.FromHandle(Resources.icon.GetHicon());
         }
 
-        private void AddTab(IServiceView service)
+        private void AddTab(MessageService service)
         {
             var newTab = new TabPage
             {
@@ -35,7 +36,7 @@ namespace ModClientWinFormUI
             var selectionWin = new ChatSelectionWindow();
             selectionWin.ShowDialog();
             if (selectionWin.DialogResult == DialogResult.OK)
-                AddTab(selectionWin.MessageService.GetView());
+                AddTab(selectionWin.MessageService);
         }
 
         private void closeTabButton_Click(object sender, EventArgs e)
@@ -44,7 +45,7 @@ namespace ModClientWinFormUI
             if (selected == null) return;
 
             foreach (var control in selected.Controls)
-                (control as ChatView)?.Service.Close();
+                (control as ChatView)?.ViewPlugin.Close();
 
             tabControl1.TabPages.Remove(selected);
         }
@@ -54,12 +55,12 @@ namespace ModClientWinFormUI
         {
             foreach (var page in tabControl1.TabPages)
             foreach (var control in ((TabPage) page).Controls.OfType<ChatView>())
-                control.Service.Close();
+                control.ViewPlugin.Close();
         }
 
         private void devChatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTab(new HackChatMessageService("ModClient_test", "test", "botDev").GetView());
+            AddTab(new HackChatMessageService("ModClient_test", "test", "botDev"));
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -68,40 +69,18 @@ namespace ModClientWinFormUI
             Process.Start("https://github.com/JaxForReal/ModClient/");
         }
 
-        private void addPluginToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (var control in tabControl1.SelectedTab.Controls.OfType<ChatView>())
-                control.Service.AddPlugin(new BibbaPlugin(control.Service));
-        }
-
-        /*private void AddPluginToList(string name, Type pluginType)
-        {
-            var newItem = new ToolStripMenuItem {Text = name};
-            //retrieves the current service on run
-            Func<MessageService> service =
-                () => tabControl1.SelectedTab.Controls.OfType<ChatView>().First().Service;
-
-            newItem.Click += (o, a) =>
-            {
-                if (tabControl1.SelectedTab.Controls.OfType<ChatView>().Any())
-                    service().AddPlugin((Plugin) Activator.CreateInstance(pluginType, service()));
-            };
-
-            addPluginToolStripMenuItem.DropDownItems.Add(newItem);
-        }*/
-
         private void pluginManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var service = tabControl1.SelectedTab.Controls.OfType<ChatView>().FirstOrDefault()?.Service;
+            var service = tabControl1.SelectedTab.Controls.OfType<ChatView>().FirstOrDefault()?.ViewPlugin;
             if (service == null)
             {
-                MessageBox.Show("No service running in the current tab.", "Cannot open Plugin Manager", MessageBoxButtons.OK,
+                MessageBox.Show("No ViewPlugin running in the current tab.", "Cannot open Plugin Manager", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 return;
             }
             var pluginManager = new PluginManager
             {
-                Service = service
+                ViewPlugin = service
             };
             pluginManager.Show();
         }

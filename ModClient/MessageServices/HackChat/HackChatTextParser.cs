@@ -10,7 +10,7 @@ namespace ModClient.MessageServices.HackChat
     {
         private static readonly Regex Latex = new Regex(@"\$[^\$]*\$");
 
-        public static List<RichTextNode> GetRichText(string text, IServiceView service)
+        public static List<RichTextNode> GetRichText(string text, MessageService service)
         {
             //start with a single plaintext node conatining the entire text
             var richText = new List<RichTextNode> {new RichTextNode(text, RichTextNode.NodeType.Text)};

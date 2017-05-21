@@ -66,45 +66,45 @@ namespace ModClient.MessageServices.HackChat
                     var trip = (string) messageJson["trip"];
 
                     //TODO is giving textparser a view a good idea?
-                    var richText = HackChatTextParser.GetRichText(text, GetView());
+                    var richText = HackChatTextParser.GetRichText(text, this);
                     var message = new Message(nick, trip, text, richText, text.ToLower().Contains(Username.ToLower()),
                         time);
 
-                    OnMessageRecievedInternal(message);
+                    OnMessage(message);
                     break;
                 case "onlineSet":
                     OnlineUsers = messageJson["nicks"].ToObject<List<string>>();
-                    OnInfoRecievedInternal(InfoType.OnlineSet, OnlineUsers);
+                    OnInfo(InfoType.OnlineSet, OnlineUsers);
                     break;
                 case "onlineAdd":
                     var addNick = (string) messageJson["nick"];
                     OnlineUsers.Add(addNick);
-                    OnInfoRecievedInternal(InfoType.OnlineAdd, addNick);
+                    OnInfo(InfoType.OnlineAdd, addNick);
                     break;
                 case "onlineRemove":
                     var removeNick = (string) messageJson["nick"];
                     OnlineUsers.Remove(removeNick);
-                    OnInfoRecievedInternal(InfoType.OnlineRemove, removeNick);
+                    OnInfo(InfoType.OnlineRemove, removeNick);
                     break;
                 case "warn":
                     var warnText = (string) messageJson["text"];
                     switch (warnText)
                     {
                         case "Nickname must consist of up to 24 letters, numbers, and underscores":
-                            OnInfoRecievedInternal(InfoType.InvalidUsername, warnText);
+                            OnInfo(InfoType.InvalidUsername, warnText);
                             break;
                         case "Cannot impersonate the admin":
-                            OnInfoRecievedInternal(InfoType.ImpersonatingAdmin, warnText);
+                            OnInfo(InfoType.ImpersonatingAdmin, warnText);
                             break;
                         case "Nickname taken":
-                            OnInfoRecievedInternal(InfoType.UsernameTaken, warnText);
+                            OnInfo(InfoType.UsernameTaken, warnText);
                             break;
                         case "You are joining channels too fast. Wait a moment and try again.":
-                            OnInfoRecievedInternal(InfoType.ChannelRatelimit, warnText);
+                            OnInfo(InfoType.ChannelRatelimit, warnText);
                             break;
                         case "You are sending too much text. Wait a moment and try again.\n" +
                              "Press the up arrow key to restore your last message.":
-                            OnInfoRecievedInternal(InfoType.MessageRatelimit, warnText);
+                            OnInfo(InfoType.MessageRatelimit, warnText);
                             break;
                         default:
                             Console.WriteLine("Unrecognised warning:\n" + e.Data);

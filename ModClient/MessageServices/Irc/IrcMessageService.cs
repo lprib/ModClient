@@ -18,7 +18,7 @@ namespace ModClient.MessageServices.Irc
                 var user = args.PrivateMessage.User.User;
                 var text = args.PrivateMessage.Message;
 
-                OnMessageRecievedInternal(new Message(user, null, text,
+                OnMessage(new Message(user, null, text,
                     new List<RichTextNode> {new RichTextNode(text, RichTextNode.NodeType.Text)}, false, DateTime.Now));
             };
         }

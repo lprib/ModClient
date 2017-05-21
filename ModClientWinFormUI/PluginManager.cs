@@ -15,15 +15,15 @@ namespace ModClientWinFormUI
 {
     public partial class PluginManager : Form
     {
-        private IServiceView service;
+        private MessageService.Plugin parentViewPlugin;
 
-        public IServiceView Service
+        public MessageService.Plugin ViewPlugin
         {
             set
             {
-                service = value;
-                //when service is initially loaded, add the UI for each already running plugin
-                foreach (var plugin in service.Plugins)
+                parentViewPlugin = value;
+                //when parentViewPlugin is initially loaded, add the UI for each already running plugin
+                foreach (var plugin in parentViewPlugin.OtherPlugins)
                 {
                     InitialisePluginUI(plugin);
                 }
@@ -32,7 +32,8 @@ namespace ModClientWinFormUI
 
         private Button currentSelectedPluginButton;
 
-        private Dictionary<Button, Plugin> activePluginButtons = new Dictionary<Button, Plugin>();
+        private Dictionary<Button, MessageService.Plugin> activePluginButtons =
+            new Dictionary<Button, MessageService.Plugin>();
 
         public PluginManager()
         {
@@ -44,8 +45,8 @@ namespace ModClientWinFormUI
 
         private void InitialiseNewPluginComboBox()
         {
-            //add all the default plugins to the New Plugin DropDown
-            foreach (var tuple in Plugin.DefaultPlugins)
+            //add all the default plugins to the New plugin DropDown
+            foreach (var tuple in MessageService.Plugin.Defaults)
             {
                 newPluginComboBox.Items.Add(tuple.Item1);
             }
@@ -53,18 +54,19 @@ namespace ModClientWinFormUI
             //load up the UI and initialise the plugin when it is selected in the dropdown
             newPluginComboBox.SelectionChangeCommitted += (sender, args) =>
             {
-                var selectedPluginTuple = Plugin.DefaultPlugins[newPluginComboBox.SelectedIndex];
-                var plugin = (Plugin) Activator.CreateInstance(selectedPluginTuple.Item2, service);
-                service.AddPlugin(plugin);
+                var selectedPluginTuple = MessageService.Plugin.Defaults[newPluginComboBox.SelectedIndex];
+                var plugin =
+                    (MessageService.Plugin)
+                    Activator.CreateInstance(selectedPluginTuple.Item2, parentViewPlugin.Service);
                 InitialisePluginUI(plugin);
             };
         }
 
-        private void InitialisePluginUI(Plugin plugin)
+        private void InitialisePluginUI(MessageService.Plugin plugin)
         {
             var activePluginButton = new Button
             {
-                Text = plugin.ToString()
+                Text = plugin.PluginName
             };
 
             activePluginButtons[activePluginButton] = plugin;
@@ -81,7 +83,7 @@ namespace ModClientWinFormUI
             activePluginsList.Controls.Add(activePluginButton);
         }
 
-        private TableLayoutPanel GetOptionsPanel(Plugin plugin)
+        private TableLayoutPanel GetOptionsPanel(MessageService.Plugin plugin)
         {
             TableLayoutPanel panel = new TableLayoutPanel
             {
@@ -139,10 +141,10 @@ namespace ModClientWinFormUI
 
         private void removePluginButton_Click(object sender, EventArgs e)
         {
-            var pluginToRemove = activePluginButtons[currentSelectedPluginButton];
+            /*var pluginToRemove = activePluginButtons[currentSelectedPluginButton];
             activePluginsList.Controls.Remove(currentSelectedPluginButton);
-            service.RemovePlugin(pluginToRemove);
-            pluginOptionsPanel.Controls.Clear();
+            parentViewPlugin.RemovePlugin(pluginToRemove);
+            pluginOptionsPanel.Controls.Clear();*/
         }
     }
 }

@@ -2,9 +2,9 @@
 using System.Text.RegularExpressions;
 using ModClient.MessageServices;
 
-namespace ModClient.Plugins
+namespace ModClient.Plugins.DefaultPlugins
 {
-    public class ResponsePlugin : Plugin
+    public class ResponsePlugin : MessageService.Plugin
     {
         private static readonly Regex AddResponseRegex = new Regex(@"^add ""([^""]+)"" ""([^""]+)""");
         private readonly Dictionary<string, string> responses = new Dictionary<string, string>();
@@ -14,7 +14,7 @@ namespace ModClient.Plugins
             new ConfigOption("Trigger", ConfigOption.Type.Text) {Data = "/response "}
         };
 
-        public ResponsePlugin(IServiceView service) : base(service)
+        public ResponsePlugin(MessageService service) : base(service)
         {
         }
 
@@ -33,31 +33,27 @@ namespace ModClient.Plugins
                 var newTrigger = match.Groups[1].Value;
                 var newResponse = match.Groups[2].Value;
                 responses.Add(newTrigger, newResponse);
-                PluginOutput($"Added: trigger={newTrigger} response={newResponse}");
+                LocalOutput($"Added: trigger={newTrigger} response={newResponse}");
             }
             else if (newMessage.StartsWith("clear"))
             {
                 responses.Clear();
-                PluginOutput("Cleared trigger/responses");
+                LocalOutput("Cleared trigger/responses");
             }
             else
             {
-                PluginOutput("Unknown command: " + message);
+                LocalOutput("Unknown command: " + message);
             }
             return null;
         }
 
-        protected override void OnEnabled() => ParentService.OnMessage += OnMessage;
-
-        protected override void OnDisabled() => ParentService.OnMessage -= OnMessage;
-
-        private void OnMessage(Message message)
+        public override void OnMessage(Message message)
         {
             foreach (var response in responses)
                 if (message.PlainText.ToLower() == response.Key)
-                    ParentService.SendMessage(response.Value);
+                    SendMessage(response.Value);
         }
 
-        public override string ToString() => "Automated Response";
+        public override string PluginName { get; } = "Automated Response";
     }
 }

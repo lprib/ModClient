@@ -1,14 +1,14 @@
 ﻿using System.Text.RegularExpressions;
 using ModClient.MessageServices;
 
-namespace ModClient.Plugins
+namespace ModClient.Plugins.DefaultPlugins
 {
-    public class TextCorrectionPlugin : Plugin
+    public class TextCorrectionPlugin : MessageService.Plugin
     {
         private static readonly Regex Regex = new Regex(@"^s/([^/]+)/([^/]+)");
         private string previousMessage = "";
 
-        public TextCorrectionPlugin(IServiceView service) : base(service)
+        public TextCorrectionPlugin(MessageService service) : base(service)
         {
         }
 
@@ -25,6 +25,6 @@ namespace ModClient.Plugins
             return message;
         }
 
-        public override string ToString() => "Text Corrector";
+        public override string PluginName { get; } = "Text Corrector";
     }
 }
