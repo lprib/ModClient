@@ -74,7 +74,7 @@ namespace ModClientWinFormUI
             {
                 chatBox.AppendText("\n");
 
-                AppendStyle("--", SelfMentionStyle);
+                //AppendStyle("--", SelfMentionStyle);
                 AppendStyle(message.Time.ToString("hh:mmtt"), TimeStyle);
                 AppendStyle(" ");
                 AppendStyle(message.SenderTrip, TripStyle);

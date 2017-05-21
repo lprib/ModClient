@@ -8,6 +8,7 @@ namespace ModClient.MessageServices
 {
     partial class MessageService
     {
+        //TODO manage plugin removal/unsubscribing
         public abstract class Plugin
         {
             public MessageService Service { get; }

@@ -93,9 +93,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(323, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "OldPlugin Options";
+            this.label3.Text = "Plugin Options";
             // 
             // removePluginButton
             // 

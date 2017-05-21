@@ -65,7 +65,6 @@ namespace ModClient.MessageServices.HackChat
                     var nick = (string) messageJson["nick"];
                     var trip = (string) messageJson["trip"];
 
-                    //TODO is giving textparser a view a good idea?
                     var richText = HackChatTextParser.GetRichText(text, this);
                     var message = new Message(nick, trip, text, richText, text.ToLower().Contains(Username.ToLower()),
                         time);

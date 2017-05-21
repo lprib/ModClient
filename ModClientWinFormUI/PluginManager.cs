@@ -66,7 +66,9 @@ namespace ModClientWinFormUI
         {
             var activePluginButton = new Button
             {
-                Text = plugin.PluginName
+                Text = plugin.PluginName,
+                Width = activePluginsList.Width - 8,
+                //Anchor = AnchorStyles.Left | AnchorStyles.Right,
             };
 
             activePluginButtons[activePluginButton] = plugin;

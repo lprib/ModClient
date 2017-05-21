@@ -3,6 +3,7 @@ using ModClient.MessageServices;
 
 namespace ModClient.Plugins.DefaultPlugins
 {
+    //TODO configoption for text reply prefix ("*") and more
     public class TextCorrectionPlugin : MessageService.Plugin
     {
         private static readonly Regex Regex = new Regex(@"^s/([^/]+)/([^/]+)");
