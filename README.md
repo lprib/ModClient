@@ -1,13 +1,13 @@
 # ModClient
 C# client for online messaging services.
 
-##Features:
+## Features:
 * **Modular backends**: you can write a simple backend so that ModClient can connect to any type of message service.
 * **Plugins**: plugins augment incoming and outgoing messages, so you can write bots or helpful internal functions as an add-on.  
 
 ![](http://i.imgur.com/6yaJoBC.png) ![](http://i.imgur.com/nJHTfij.png)  
 
-##Plugin API:
+## Plugin API:
 * Plugins must inherit from `PluginBase`
 * `ParentService`: This is the MessageService that the plugin is connected to. Use `MessageServiceBase.SendMessage(string message)` for output to the chat.
 Subscribe to `MessageServiceBase.OnMessageRecieved` or `MessageServiceBase.OnInfoRecieved` to get notified when data comes in.
@@ -18,5 +18,3 @@ Subscribe to `MessageServiceBase.OnMessageRecieved` or `MessageServiceBase.OnInf
 You can augment messages before they are sent.
 `return null` from this method to capture the message so nothing is sent to the server.
 (This is useful for plugin-specific commands that don't need to get forwarded to the chat server)
-
-##TODO
